@@ -3,7 +3,7 @@
 ## Vision
 
 ### Project Vision: 
-This project is a prototype ordering site for Service Partners branch 2007. With it, customers will be able to place orders remotely, and without the assistance of a sales representative.
+This project is a prototype ordering site for Service Partners branch 2007. With it, customers will be able to place orders remotely, and without the assistance of a sales representative. They will also be able to browse the items available to them.
 
 ### Pain Points:
 This product will save the sales reps time, by allowing customers to place orders independently and prevent backlog when there are more orders being placed than sales reps available. It will also serve as a way to track that orders are being entered correctly by providing a confirmation of exactly what the customer input for their order.
