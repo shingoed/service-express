@@ -73,11 +73,7 @@ Once the user arrives at the site they will be prompted to log in or sign up. On
 
 
 ## Non-Functional Requirements
-Security - 
+Security - Our app will maintain customer security by preventing SQL injection (we will use a series of checks when requests are sent to the server). We will also make sure passwords are hidden (using the html password input type). As a stretch goal we will have requirements for password length when a customer first creates an account. It is important especially when making an online ordering site that the customer feels like you are protecting their information.
 
-Usability
-
-If you are stuck on what non-functional requirements are, do a quick online search and do some research. Write a minimum of 3-5 sentences to describe how the non-functional requirements fit into your app.
-
-You MUST describe what the non-functional requirement is and how it will be implemented. Simply saying “Our project will be testable for testability” is NOT acceptable. Tell us how, why, and what.
+Usability - A customer will be able to easily find the items they are looking for, for MVP we will accomplish this by only showing a minimal number of items. As a stretch goal we will implement search and styling features that make it visually directive for the customer on where they need to go. Customers want to be able to go straight to the materials they need and place an order quickly and efficiently.
 
