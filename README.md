@@ -4,9 +4,9 @@
 
 This web application is a prototype online store for the customers of Service Partners branch 2007. Users will have to ability to select items and quantities, add them to a cart, delete or edit items from that cart and submit their order to the sales team.
 
-### Communication Agreement: [Click Here](https://docs.google.com/document/d/1UCbBnhNDKBHi3setIF5jUazahVgzSWuCw-hhCAPljsg/edit?usp=sharing)
 ### Project Pitch: [Click Here](https://docs.google.com/document/d/1YybsAaAyw-0DSdFZIQa836C8rAtLPWxf9jNxDjD0XdI/edit)
 ### Feature Ideas: [Click Here](https://docs.google.com/document/d/1usTgP-EIFnJVzO-sZFlOkzxSCus_oPFbOm1lqI1JkBE/edit?usp=sharing)
+### Communication Agreement: [Click Here](https://docs.google.com/document/d/1UCbBnhNDKBHi3setIF5jUazahVgzSWuCw-hhCAPljsg/edit?usp=sharing)
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### User Stories
