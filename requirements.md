@@ -29,7 +29,6 @@ What will your MVP functionality be?
 - A customer can update an item in their cart (update qty)
 - A customer can remove an item from their cart
 - A customer can ‘checkout’
-- Upon checkout their order (items and quantities) will be send in an email to a salesperson
 - About us page
 
 What are your stretch goals?
@@ -52,10 +51,12 @@ What are your stretch goals?
 - A sales rep can see the customer credit card to charge
 - A search engine or radio box that list all the elbows for downspouts
 - Import/Export order data through excel
+- Upon checkout their order (items and quantities) will be send in an email to a salesperson
 
 
 ## Stretch
 What stretch goals are you going to aim for?
+- Upon checkout their order (items and quantities) will be send in an email to a salesperson
 - Web responsive design (mobile first) 
 - Style using bootStrap
 - An admin can log in
