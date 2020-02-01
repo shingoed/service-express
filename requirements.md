@@ -13,11 +13,11 @@ The ordering process can be cumbersome for customers and salespeople. Without of
 
 ## Scope (In/Out)
 ### IN - 
-The web app will provide a way to keep track of all orders a customer makes in a database.
-The web app will allow users to place orders independently, without the need for inside sales assistance.
-The web app will allow customers to select individual items from order and edit their orders.
-The web app will allow customers to place order at any time (even outside of business hours)
-The web app will email customers a record of their order for confirmation.
+- The web app will provide a way to keep track of all orders a customer makes in a database.
+- The web app will allow users to place orders independently, without the need for inside sales assistance.
+- The web app will allow customers to select individual items from order and edit their orders.
+- The web app will allow customers to place order at any time (even outside of business hours)
+- The web app will email customers a record of their order for confirmation.
 
 ### OUT - 
 This app will never perform payment transactions.
