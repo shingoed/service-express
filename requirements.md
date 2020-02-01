@@ -65,9 +65,9 @@ What stretch goals are you going to aim for?
 - A search engine or radio box that list all the elbows for downspouts
 
 ## Functional Requirements
-A customer can make an account and login/logout
-A customer can add, update and delete items in a cart
-Once an order is submitted, it will be sent automatically via email
+- A customer can make an account and login/logout
+- A customer can add, update and delete items in a cart
+
 
 ### Data Flow
 Once the user arrives at the site they will be prompted to log in or sign up. Once either event occurs they will be rerouted to the /products page. All items will be displayed on the products page, the user can then click on individual items to see it's details. Once they select an individual item they will be rerouted to the /products/item/{id} where they can see specific details about the item, and add it to their cart + select a quantity. The item will be added to the cart when the form is submitted and it will be saved into the database to an item_ordered table with a relational key to the order table and the order table will contain a key to the customers table. The user will not be re-routed from their current page. Once a customer is finished adding items they can then click 'checkout' which will reroute them to their cart. There they will be asked to review their order. Once they have reviewed the order and clicked submit, they will be rerouted to a /thankyou page which thanks them for their order. They can then log out of the application, which will take them back to the landing page.
