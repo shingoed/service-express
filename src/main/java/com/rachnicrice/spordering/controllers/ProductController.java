@@ -22,26 +22,6 @@ public class ProductController {
     @Autowired
     ProductRepository productRepository;
 
-    @GetMapping("/")
-    public String homePage(Model model) {
-        // make sure add in the username attribute, p.getname on every route so the logged in user can see a different nav bar.
-
-        return "home";
-    }
-
-    @GetMapping("/login")
-    public String getLogin(Model m, Principal p) {
-//        ApplicationUser user = applicationUserRepository.findByUsername(p.getName());
-//        m.addAttribute("user", user);
-        return "login";
-    }
-    @GetMapping("/signup")
-    public String getSignup() {
-        return "signup";
-    }
-
-
-
     @GetMapping("/product")
     public String showPage(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
         PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());

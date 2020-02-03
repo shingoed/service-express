@@ -19,16 +19,15 @@ public class ApplicationUser implements UserDetails {
     String username;
     String password;
 
+//    Default Constructor
     public ApplicationUser() {
     }
 
-
+//    Actual Contructor
     public ApplicationUser(String username, String password) {
         this.username = username;
         this.password = password;
-
     }
-
 
     //instance methods
     @Override
@@ -38,31 +37,37 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getPassword() {
+
         return this.password;
     }
 
     @Override
     public String getUsername() {
+
         return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
+
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isEnabled() {
+
         return true;
     }
 }
