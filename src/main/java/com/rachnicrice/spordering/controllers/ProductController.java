@@ -24,9 +24,9 @@ public class ProductController {
 
     @GetMapping("/products")
     public String showPage(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "item_id") String sortBy) {
-        PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+       // PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
 
-        model.addAttribute("data", productRepository.findAll(pagereq));
+        model.addAttribute("data", productRepository.findAll());
 
         model.addAttribute("currentPage",page);
         return "products";
