@@ -17,6 +17,7 @@ public class Product {
     private String color;
     private String style;
     private String type;
+    private int orderIncrement;
 
     @ManyToMany(mappedBy = "lineItemsInThisOrder")
     List<Order> ordersThatHaveThisItem;
@@ -31,6 +32,17 @@ public class Product {
         this.color = color;
         this.style = style;
         this.type = type;
+    }
+
+    public Product(String itemCode, String itemName, int width, int length, String color, String style, String type, int orderIncrement) {
+        this.itemCode = itemCode;
+        this.itemName = itemName;
+        this.width = width;
+        this.length = length;
+        this.color = color;
+        this.style = style;
+        this.type = type;
+        this.orderIncrement = orderIncrement;
     }
 
     public Product(String itemCode, String itemName, int length, String color, String type) {
