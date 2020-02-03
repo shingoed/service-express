@@ -24,6 +24,8 @@ public class Cart {
     )
     List<Product> itemsInThisCart;
 
+    public Cart () {}
+
     public Cart(ApplicationUser user, Date date_created, Boolean isSubmitted) {
         this.user = user;
         this.date_created = date_created;
