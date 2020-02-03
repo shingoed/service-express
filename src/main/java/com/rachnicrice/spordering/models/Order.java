@@ -1,6 +1,10 @@
 package com.rachnicrice.spordering.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,12 +22,8 @@ public class Order {
     @ManyToOne
     ApplicationUser user;
 
-    @ManyToMany
-    @JoinTable(name = "orders_items",
-            joinColumns = { @JoinColumn(name = "order_id")},
-            inverseJoinColumns = { @JoinColumn(name = "item_id")}
-    )
-    List<Product> itemsInThisOrder;
+    @OneToMany(mappedBy = "order")
+    List<LineItem> lineItemsInThisOrder;
 
     public Order(ApplicationUser user, Date date_created, Boolean isSubmitted) {
         this.user = user;
@@ -47,7 +47,7 @@ public class Order {
         return user;
     }
 
-    public List<Product> getItemsInThisOrder() {
-        return itemsInThisOrder;
+    public List<LineItem> getItemsInThisOrder() {
+        return lineItemsInThisOrder;
     }
 }
