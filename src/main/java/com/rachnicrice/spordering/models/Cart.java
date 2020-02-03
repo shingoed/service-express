@@ -12,6 +12,7 @@ public class Cart {
     private Long cart_id;
 
     Date date_created;
+    Boolean isSubmitted;
 
     @OneToOne
     ApplicationUser user;
@@ -23,8 +24,9 @@ public class Cart {
     )
     List<Product> itemsInThisCart;
 
-    public Cart(ApplicationUser user, Date date_created) {
+    public Cart(ApplicationUser user, Date date_created, Boolean isSubmitted) {
         this.user = user;
         this.date_created = date_created;
+        this.isSubmitted = isSubmitted;
     }
 }
