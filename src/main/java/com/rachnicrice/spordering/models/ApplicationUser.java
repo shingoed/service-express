@@ -23,8 +23,10 @@ public class ApplicationUser implements UserDetails {
     @OneToOne(mappedBy = "user")
     Cart cart;
 
+//    Default Constructor
     public ApplicationUser() {
     }
+
 
     public ApplicationUser(String username, String password, String email) {
         this.username = username;
@@ -32,10 +34,14 @@ public class ApplicationUser implements UserDetails {
         this.email = email;
     }
 
+
+//    Actual Contructor
+
     public ApplicationUser(String username, String password) {
         this.username = username;
         this.password = password;
     }
+
 
     public ApplicationUser(String username, String password, String email, String phone, String firstName, String lastName) {
         this.username = username;
@@ -46,6 +52,7 @@ public class ApplicationUser implements UserDetails {
         this.lastName = lastName;
     }
 
+
     //instance methods
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -54,31 +61,37 @@ public class ApplicationUser implements UserDetails {
 
     @Override
     public String getPassword() {
+
         return this.password;
     }
 
     @Override
     public String getUsername() {
+
         return this.username;
     }
 
     @Override
     public boolean isAccountNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
+
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isEnabled() {
+
         return true;
     }
 }
