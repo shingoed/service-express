@@ -35,7 +35,7 @@ public class ProductApplication implements CommandLineRunner {
 //        productRepository.save(new Product("DS2x3BLK80", "DS 2x3 ", 50,70, "Styling", "OtherType"));
 //        productRepository.save(new Product("DS2x3BLK80", "DS 2x3 W/ style", 480, 260, "Black", "OtherType"));
 //        applicationUserRepository.save(new ApplicationUser("username","password"));
-//        applicationUserRepository.save(new ApplicationUser("test","test"));
+        applicationUserRepository.save(new ApplicationUser("test","test"));
 
     }
 
