@@ -12,18 +12,19 @@ public class Product {
 
     private String itemCode;
     private String itemName;
-    private int width;
-    private int length;
+    private String width;
+    private String length;
     private String color;
     private String style;
     private String type;
+    private int orderIncrement;
 
     @ManyToMany(mappedBy = "lineItemsInThisOrder")
     List<Order> ordersThatHaveThisItem;
 
     public Product() { }
 
-    public Product(String itemCode, String itemName, int width, int length, String color, String style, String type) {
+    public Product(String itemCode, String itemName, String width, String length, String color, String style, String type) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.width = width;
@@ -33,7 +34,18 @@ public class Product {
         this.type = type;
     }
 
-    public Product(String itemCode, String itemName, int length, String color, String type) {
+    public Product(String itemCode, String itemName, String width, String length, String color, String style, String type, int orderIncrement) {
+        this.itemCode = itemCode;
+        this.itemName = itemName;
+        this.width = width;
+        this.length = length;
+        this.color = color;
+        this.style = style;
+        this.type = type;
+        this.orderIncrement = orderIncrement;
+    }
+
+    public Product(String itemCode, String itemName, String length, String color, String type) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.length = length;
@@ -41,7 +53,7 @@ public class Product {
         this.type = type;
     }
 
-    public Product(String itemCode, String itemName, int length, int width, String style, String type) {
+    public Product(String itemCode, String itemName, String length, String width, String style, String type) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.width = width;
@@ -75,19 +87,19 @@ public class Product {
         this.itemCode = itemCode;
     }
 
-    public int getWidth() {
+    public String getWidth() {
         return width;
     }
 
-    public void setWidth(int width) {
+    public void setWidth(String width) {
         this.width = width;
     }
 
-    public int getLength() {
+    public String getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public void setLength(String length) {
         this.length = length;
     }
 
