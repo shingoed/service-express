@@ -65,4 +65,9 @@ public class ProductController {
         return productRepository.getOne(id);
 
     }
+
+    @GetMapping("/profile")
+    public String getProfile(){
+        return "profile";
+    }
 }
