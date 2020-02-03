@@ -43,11 +43,11 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public RedirectView signup(String username, String password) {
+    public RedirectView signup(String username, String password, String email, String phone, String firstName, String lastName) {
         if (applicationUserRepository.findByUsername(username) == null) {
             System.out.println(username);
             System.out.println(password);
-            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password));
+            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName);
             applicationUserRepository.save(newUser);
 
 //            auto-login when people sign up
