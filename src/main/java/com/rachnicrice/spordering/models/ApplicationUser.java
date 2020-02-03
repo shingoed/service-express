@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -20,13 +21,13 @@ public class ApplicationUser implements UserDetails {
     String firstName;
     String lastName;
 
-    @OneToOne(mappedBy = "user")
-    Cart cart;
+    @OneToMany(mappedBy = "user")
+    List<Order> orders;
 
 //    Default Constructor
     public ApplicationUser() {
     }
-    
+
 
     public ApplicationUser(String username, String password) {
         this.username = username;
@@ -66,6 +67,30 @@ public class ApplicationUser implements UserDetails {
     public String getUsername() {
 
         return this.username;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 
     @Override

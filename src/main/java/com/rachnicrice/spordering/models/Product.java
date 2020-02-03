@@ -19,7 +19,7 @@ public class Product {
     private String type;
 
     @ManyToMany(mappedBy = "itemsInThisCart")
-    List<Cart> cartsThatHaveThisItem;
+    List<Order> cartsThatHaveThisItem;
 
     public Product() { }
 
