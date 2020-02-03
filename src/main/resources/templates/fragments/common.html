@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:fragment="head">
+        <link rel="stylesheet" type="text/css" th:href="@{/style/style.css}">
+        <script type="text/javascript" src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" th:src="@{/js/main.js}" src="../static/js/main.js"></script>
+        <link rel="stylesheet" href="/webjars/bootstrap/4.4.1/css/bootstrap.min.css"/>
+        <title>Service Partner E-Store</title>
+    </th:block>
+</head>
+<body>
+
+    <nav th:fragment="navbar" class="navbar navbar-expand-md navbar-light bg-light">
+        <a href="/" class="navbar-appname">Service Partner E-store</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+            <span class="narbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul th:if="${username}" class="navbar-nav ml-auto">
+                <li class="narbar-item"><a href="#" class="nav-link">Profile</a></li>
+                <li class="narbar-item"><a href="#" class="nav-link">Products</a></li>
+                <li class="narbar-item"><a href="#" class="nav-link">Cart</a></li>
+                <li class="narbar-item"><a href="#" class="nav-link">Contact Us</a></li>
+                <li class="narbar-item"><a href="#" class="nav-link">About Us</a></li>
+            </ul>
+            <ul th:unless="${username}" class="navbar-nav ml-auto">
+                <li class="narbar-item"><a href="/login" class="nav-link">Sign In</a></li>
+                <li class="narbar-item"><a href="/signup" class="nav-link">Sign up</a></li>
+                <li class="narbar-item"><a href="#" class="nav-link">Contact Us</a></li>
+                <li class="narbar-item"><a href="#" class="nav-link">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+
+
+</body>
+</html>

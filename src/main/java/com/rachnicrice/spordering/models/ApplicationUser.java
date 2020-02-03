@@ -20,6 +20,16 @@ public class ApplicationUser implements UserDetails {
     String username;
     String password;
 
+    public ApplicationUser() {
+    }
+
+
+    public ApplicationUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+
+    }
+
 
     //instance methods
     @Override
