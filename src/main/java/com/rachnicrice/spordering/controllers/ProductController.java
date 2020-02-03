@@ -52,6 +52,17 @@ public class ProductController {
         return "products";
     }
 
+    @GetMapping("/mycart")
+    public String showCart(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
+        PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+
+        model.addAttribute("data", productRepository.findAll(pagereq));
+
+        model.addAttribute("currentPage",page);
+        return "mycart";
+    }
+
+
     @PostMapping("/save")
     public RedirectView save(Product product) {
         productRepository.save(product);
