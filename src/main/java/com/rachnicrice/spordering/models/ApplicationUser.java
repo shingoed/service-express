@@ -11,10 +11,6 @@ import java.util.Collection;
 
 @Entity
 public class ApplicationUser implements UserDetails {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
     //instance variables
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
