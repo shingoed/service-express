@@ -2,9 +2,131 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home Page</title>
+    <title>My Cart</title>
+    <th:block th:replace="fragments/common :: head"> </th:block>
 </head>
 <body>
+<nav th:replace="fragments/common :: navbar"></nav>
+
+<div class="container">
+    <div class="card">
+        <div class="card-block">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ItemCode ??</th>
+                    <th>Name</th>
+                    <th>Width</th>
+                    <th>Length</th>
+                    <th>Color</th>
+                    <th>Style</th>
+                    <th>Type</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:each="product : ${data.content}">
+                    <td th:text="${product.itemCode}"></td>
+                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.width}"></td>
+                    <td th:text="${product.length}"></td>
+                    <td th:text="${product.color}"></td>
+                    <td th:text="${product.style}"></td>
+                    <td th:text="${product.type}"></td>
+                    <td><a th:href="@{/findOne/(id=${product.id})}" class="btn btn-primary eBtn">Edit Quantity</a>
+                        <a th:href="@{/delete/(id=${product.id})}" class="btn btn-danger delBtn">Delete</a></td>
+
+                </tr>
+                </tbody>
+
+            </table>
+            <!--                horizontal line-->
+            <hr/>
+            <ul class="nav nav-pills">
+                <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages-1)}">
+                    <a th:href="@{/product/(page=${i})}" th:text="${i}" class="nav-link" th:classappend="${currentPage} ==${i}?'active':''"></a>
+                    <!--                        ternary operator if there is current page, set active to have a box showing what page your on.-->
+                </li>
+
+            </ul>
+        </div>
+
+    </div>
+    <!-- Got this form from bootstrap 4-->
+    <div class="myForm">
+        <form th:action="@{/save}" method="POST">
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Quantity</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="id" name="id" value=" "/>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="itemCode" name="itemCode" value=" "/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="name" name="name" value=" "/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="length" name="length" value=" "/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="width" name="width" value=" "/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="color" name="color" value=" "/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="style" name="style" value=" "/>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="type" name="type" value=" "/>
+                            </div>
+                            <div class="form-group">
+                                <label for="quantity" class="col-form-label">Quantity:</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" value=" "/>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-primary" value="save"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="alert alert-danger">Are you sure you want to delete this item off your cart?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <a href="" class="btn btn-danger" id="delReference">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>
