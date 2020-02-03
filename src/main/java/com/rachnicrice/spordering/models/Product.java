@@ -1,48 +1,49 @@
 package com.rachnicrice.spordering.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long item_id;
 
-    private Long id;
     private String itemCode;
-    private String name;
+    private String itemName;
     private int width;
     private int length;
     private String color;
     private String style;
     private String type;
 
+    @ManyToMany(mappedBy = "itemsInThisCart")
+    List<Cart> cartsThatHaveThisItem;
 
     public Product() { }
 
-    public Product(String itemCode, String name, int width, int length, String color, String style, String type) {
+    public Product(String itemCode, String itemName, int width, int length, String color, String style, String type) {
         this.itemCode = itemCode;
-        this.name = name;
+        this.itemName = itemName;
         this.width = width;
         this.length = length;
         this.color = color;
         this.style = style;
         this.type = type;
     }
-    public Product(String itemCode, String name, int length, String color, String type) {
+
+    public Product(String itemCode, String itemName, int length, String color, String type) {
         this.itemCode = itemCode;
-        this.name = name;
+        this.itemName = itemName;
         this.length = length;
         this.color = color;
         this.type = type;
     }
 
-    public Product(String itemCode, String name, int length, int width, String style, String type) {
+    public Product(String itemCode, String itemName, int length, int width, String style, String type) {
         this.itemCode = itemCode;
-        this.name = name;
+        this.itemName = itemName;
         this.width = width;
         this.length = length;
         this.style = style;
@@ -51,19 +52,19 @@ public class Product {
 
 
     public Long getId() {
-        return id;
+        return item_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.item_id = id;
     }
 
     public String getName() {
-        return name;
+        return itemName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.itemName = name;
     }
 
     public String getItemCode() {
@@ -118,7 +119,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "itemCode='" + itemCode + '\'' +
-                ", name='" + name + '\'' +
+                ", name='" + itemName + '\'' +
                 ", width=" + width +
                 ", length=" + length +
                 ", color='" + color + '\'' +
