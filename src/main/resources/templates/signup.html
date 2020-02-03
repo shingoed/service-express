@@ -12,6 +12,7 @@
         <div id="formContent">
             <!-- Tabs Titles -->
             <!-- Login Form -->
+            <p class="error" th:if="${param.taken}">Sorry, that username was already taken. Please try a new username.</p>
             <form action="/signup" method="POST" class="loginForm"><br>
                 <label>Username <input type="text" class="fadeIn second" name="username" placeholder="username"> </label>
                 <label>Password <input type="password" class="fadeIn third" name="password" placeholder="password"> </label>
