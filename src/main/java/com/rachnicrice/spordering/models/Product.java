@@ -18,8 +18,8 @@ public class Product {
     private String style;
     private String type;
 
-    @ManyToMany(mappedBy = "itemsInThisCart")
-    List<Order> cartsThatHaveThisItem;
+    @ManyToMany(mappedBy = "itemsInThisOrder")
+    List<Order> ordersThatHaveThisItem;
 
     public Product() { }
 
