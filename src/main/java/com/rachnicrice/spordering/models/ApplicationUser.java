@@ -16,6 +16,9 @@ public class ApplicationUser implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
     //instance variables
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    Long id;
 
     String username;
     String password;
