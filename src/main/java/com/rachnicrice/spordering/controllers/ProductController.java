@@ -23,8 +23,10 @@ public class ProductController {
     ProductRepository productRepository;
 
     @GetMapping("/products")
-    public String showPage(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "item_id") String sortBy) {
+    public String showPage(Principal p, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "item_id") String sortBy) {
        // PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+
+        model.addAttribute("username",p.getName());
 
         model.addAttribute("data", productRepository.findAll());
 
