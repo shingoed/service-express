@@ -11,6 +11,10 @@ import java.util.Collection;
 
 @Entity
 public class ApplicationUser implements UserDetails {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
     //instance variables
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -19,8 +23,15 @@ public class ApplicationUser implements UserDetails {
     String username;
     String password;
 
-    //constructor function
-    ApplicationUser () {};
+    public ApplicationUser() {
+    }
+
+
+    public ApplicationUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+
+    }
 
 
     //instance methods

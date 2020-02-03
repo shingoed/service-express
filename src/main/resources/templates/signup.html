@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <th:block th:replace="fragments/common :: head"> </th:block>
+</head>
+<body>
+    <nav th:replace="fragments/common :: navbar"></nav>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <!-- Login Form -->
+            <form class="loginForm"><br>
+                <label>Username <input type="text" class="fadeIn second" name="username" placeholder="username"> </label>
+                <label>Password <input type="password" class="fadeIn third" name="username" placeholder="password"> </label>
+                <input type="submit" class="fadeIn fourth" value="Sign Up">
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
