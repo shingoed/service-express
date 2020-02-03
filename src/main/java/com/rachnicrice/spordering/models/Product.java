@@ -18,7 +18,7 @@ public class Product {
     private String style;
     private String type;
 
-    @ManyToMany(mappedBy = "itemsInThisOrder")
+    @ManyToMany(mappedBy = "lineItemsInThisOrder")
     List<Order> ordersThatHaveThisItem;
 
     public Product() { }
