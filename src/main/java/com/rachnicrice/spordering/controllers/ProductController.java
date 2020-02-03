@@ -42,14 +42,14 @@ public class ProductController {
 
 
 
-    @GetMapping("/product")
+    @GetMapping("/products")
     public String showPage(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
         PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
 
         model.addAttribute("data", productRepository.findAll(pagereq));
 
         model.addAttribute("currentPage",page);
-        return "product";
+        return "products";
     }
 
     @PostMapping("/save")
