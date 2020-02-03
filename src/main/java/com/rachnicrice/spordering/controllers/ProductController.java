@@ -22,8 +22,8 @@ public class ProductController {
     @Autowired
     ProductRepository productRepository;
 
-    @GetMapping("/product")
-    public String showPage(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
+    @GetMapping("/products")
+    public String showPage(Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "item_id") String sortBy) {
         PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
 
         model.addAttribute("data", productRepository.findAll(pagereq));

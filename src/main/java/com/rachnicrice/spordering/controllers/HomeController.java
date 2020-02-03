@@ -43,19 +43,18 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public RedirectView signup(String username, String password) {
+    public RedirectView signup(String username, String password, String email, String phone, String firstName, String lastName) {
         if (applicationUserRepository.findByUsername(username) == null) {
             System.out.println(username);
             System.out.println(password);
-            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password));
+            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName);
             applicationUserRepository.save(newUser);
 
 //            auto-login when people sign up
             Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
-            return new RedirectView("/product");
-
+            return new RedirectView("/products");
         } else {
             return new RedirectView("/signup?taken=true");
 //************ TO DO:  have some kind of msg to pop up when they try to sign up with same name*******

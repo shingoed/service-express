@@ -24,9 +24,9 @@
                     </thead>
 
                     <tbody>
-                    <tr th:each="product : ${data.content}">
+                    <tr th:each="product : ${data}">
                         <td th:text="${product.itemCode}"></td>
-                        <td th:text="${product.name}"></td>
+                        <td th:text="${product.itemName}"></td>
                         <td th:text="${product.width}"></td>
                         <td th:text="${product.length}"></td>
                         <td th:text="${product.color}"></td>
