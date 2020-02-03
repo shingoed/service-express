@@ -9,6 +9,17 @@ This web application is a prototype online store for the customers of Service Pa
 ### Communication Agreement: [Click Here](https://docs.google.com/document/d/1UCbBnhNDKBHi3setIF5jUazahVgzSWuCw-hhCAPljsg/edit?usp=sharing)
 ------------------------------------------------------------------------------------------------------------------------------
 
+## Getting Up and Running
+
+1. Clone the repo onto your local machine using the ```git clone``` command
+2. Create a database on your machine called 'spordering'
+3. FOR WINDOWS USERS: Update the application.properties file to include your username and password for the database
+4. Start the server with the ```./gradlew bootRun``` command
+5. In your browser visit localhost:8080 to see the running application
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
 ### User Stories
  
  - As a customer, I want to be able to create an account on the ordering site, so I can place orders.
