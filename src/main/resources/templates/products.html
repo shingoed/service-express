@@ -32,8 +32,14 @@
                         <td th:text="${product.color}"></td>
                         <td th:text="${product.style}"></td>
                         <td th:text="${product.type}"></td>
-                        <td><a th:href="@{/mycart}" class="btn btn-primary tocartBtn">Add to cart!</a>
-                            <a th:href="@{/findOne/(id=${product.id})}" class="btn btn-info infoBtn">View Details</a></td>
+                        <td>
+                            <form action="/mycart" method="POST">
+                                <input type="number" id="quantity" name="quantity">
+                                <input type="submit" class="btn btn-primary" value="Add to Cart!">
+                            </form>
+                        </td>
+<!--                        maybe add quantity here????-->
+<!--                        <td><a th:href="@{/findOne/(id=${product.id}}" class="btn btn-primary tocartBtn">Add to cart!</a></td>-->
 
                     </tr>
                     </tbody>
@@ -53,7 +59,7 @@
         </div>
         <!-- Got this form from bootstrap 4-->
         <div class="myForm">
-            <form th:action="@{/save}" method="POST">
+            <form th:action="@{/mycart}" method="POST">
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -68,42 +74,8 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label for="itemCode" class="col-form-label">Item Code:</label>
-                                    <input type="text" class="form-control" id="itemCode" name="itemCode" value=" "/>
-                                    <input type="hidden" name="_method" value="UPDATE" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="name" class="col-form-label">Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name" value=" "/>
-                                    <input type="hidden" name="_method" value="UPDATE" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="length" class="col-form-label">Length:</label>
-                                    <input type="text" class="form-control" id="length" name="length" value=" "/>
-                                    <input type="hidden" name="_method" value="UPDATE" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="width" class="col-form-label">Width:</label>
-                                    <input type="text" class="form-control" id="width" name="width" value=" "/>
-                                    <input type="hidden" name="_method" value="UPDATE" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="color" class="col-form-label">Color:</label>
-                                    <input type="text" class="form-control" id="color" name="color" value=" "/>
-                                    <input type="hidden" name="_method" value="UPDATE" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="style" class="col-form-label">Style:</label>
-                                    <input type="text" class="form-control" id="style" name="style" value=" "/>
-                                    <input type="hidden" name="_method" value="UPDATE" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="type" class="col-form-label">Type:</label>
-                                    <input type="text" class="form-control" id="type" name="type" value=" "/>
-                                    <input type="hidden" name="_method" value="UPDATE" />
-                                </div>
-
-
+                                    <label for="quantity" class="col-form-label">Quantity:</label>
+<!--                                    <input type="number" class="form-control" id="quantity" name="quantity" value=" "/>-->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
