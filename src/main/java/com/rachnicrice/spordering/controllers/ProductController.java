@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -49,43 +50,29 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/mycart")
-    public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
-//        PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
-
-        if(p != null) {
-            System.out.println(p.getName()+" is logged in!");
-            model.addAttribute("username", p.getName());
-        } else {
-            System.out.println("nobody is logged in");
-        }
-
-        model.addAttribute("data", productRepository.findAll());
-
-        model.addAttribute("currentPage",page);
-
-//        Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-//        Order order = new Order(applicationUserRepository.findByUsername(p.getName()),createdAt,false);
-//        orderRepository.save(order);
-//        System.out.println(applicationUserRepository.findByUsername(p.getName()).getOrders().toString()); // return []
-        return "mycart";
-    }
-
     @PostMapping("/mycart")
-    public RedirectView addCart(Model model, Principal p) {
+    public RedirectView addCart(Model model, Principal p, String quantity, Product product) {
+//        System.out.println(quantity);
 
+        int i = Integer.parseInt(quantity);
+        System.out.println(i);
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-//        if(applicationUserRepository.findByUsername(p.getName()).getOrders().isEmpty()){ // grab user's order if its empty create a new order.
-//            Order order = new Order(applicationUserRepository.findByUsername(p.getName()),createdAt,false);
-//
-//        }else {
-//            if(applicationUserRepository.findByUsername(p.getName()).getOrders().){
-//
-//            }else {
-//
-//            }
-//        }
+        List<Order> userOrder = applicationUserRepository.findByUsername(p.getName()).getOrders();
+
+        if(userOrder.get(0).getSubmitted() == false && !userOrder.isEmpty()){ // Check to see if userOrder have existing order and isSubmitted is false
+            LineItem cartItem = new LineItem(userOrder, product, i);// create new cart item with order, product, and quantity
+            System.out.println(cartItem.toString());
+            lineItemRepository.save(cartItem);
+
+        }else { // If it doesnt have any order or have submitted order
+            Order order = new Order(applicationUserRepository.findByUsername(p.getName()),createdAt,false);
+            orderRepository.save(order);
+            LineItem cartItem = new LineItem((Order) userOrder, product, i);// create new cart item with order, product, and quantity
+            lineItemRepository.save(cartItem);
+
+        }
+
 
 
         return new RedirectView("/mycart");
@@ -112,18 +99,4 @@ public class ProductController {
         return productRepository.getOne(id);
 
     }
-
-    @GetMapping("/profile")
-
-    public String getProfile(Model model, Principal p){
-        if(p != null) {
-            System.out.println(p.getName()+" is logged in!");
-            model.addAttribute("username", p.getName());
-        } else {
-            System.out.println("nobody is logged in");
-        }
-        return "profile";
-    }
-
-
 }
