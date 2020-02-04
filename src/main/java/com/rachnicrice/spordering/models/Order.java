@@ -52,4 +52,15 @@ public class Order {
     public List<LineItem> getItemsInThisOrder() {
         return lineItemsInThisOrder;
     }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "order_id=" + order_id +
+                ", date_created=" + date_created +
+                ", isSubmitted=" + isSubmitted +
+                ", user=" + user +
+                ", lineItemsInThisOrder=" + lineItemsInThisOrder +
+                '}';
+    }
 }
