@@ -70,4 +70,6 @@ public class ProductController {
     public String getProfile(){
         return "profile";
     }
+
+
 }

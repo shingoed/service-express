@@ -26,13 +26,9 @@ public class HomeController {
     PasswordEncoder encoder;
 
     @GetMapping("/")
-    public String getHome(Model m,Principal p) {
-        //Check is the user is logged in
-        //If they are pass their username to the template
-        if (p != null) {
-            m.addAttribute("username", p.getName());
-        }
+    public String getHome() {
         return "home";
+        // make sure add in the username attribute, p.getname on every route so the logged in user can see a different nav bar.
     }
 
     @GetMapping("/login")
@@ -61,9 +57,14 @@ public class HomeController {
             return new RedirectView("/products");
         } else {
             return new RedirectView("/signup?taken=true");
-//************ TO DO:  have some kind of msg to pop up when they try to sign up with same name*******
         }
     }
+
+    @GetMapping("/aboutus")
+    public String getAboutUs(){
+        return "aboutus";
+    }
+
 }
 
 
