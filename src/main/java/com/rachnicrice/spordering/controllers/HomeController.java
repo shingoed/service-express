@@ -63,9 +63,14 @@ public class HomeController {
             return new RedirectView("/products");
         } else {
             return new RedirectView("/signup?taken=true");
-//************ TO DO:  have some kind of msg to pop up when they try to sign up with same name*******
         }
     }
+
+    @GetMapping("/aboutus")
+    public String getAboutUs(){
+        return "aboutus";
+    }
+
 }
 
 

@@ -4,9 +4,9 @@
 
 This web application is a prototype online store for the customers of Service Partners branch 2007. Users will have to ability to select items and quantities, add them to a cart, delete or edit items from that cart and submit their order to the sales team.
 
-### Project Pitch: [Click Here](https://docs.google.com/document/d/1YybsAaAyw-0DSdFZIQa836C8rAtLPWxf9jNxDjD0XdI/edit)
-### Feature Ideas: [Click Here](https://docs.google.com/document/d/1usTgP-EIFnJVzO-sZFlOkzxSCus_oPFbOm1lqI1JkBE/edit?usp=sharing)
-### Communication Agreement: [Click Here](https://docs.google.com/document/d/1UCbBnhNDKBHi3setIF5jUazahVgzSWuCw-hhCAPljsg/edit?usp=sharing)
+#### Project Pitch: [Click Here](https://docs.google.com/document/d/1YybsAaAyw-0DSdFZIQa836C8rAtLPWxf9jNxDjD0XdI/edit)
+#### Feature Ideas: [Click Here](https://docs.google.com/document/d/1usTgP-EIFnJVzO-sZFlOkzxSCus_oPFbOm1lqI1JkBE/edit?usp=sharing)
+#### Communication Agreement: [Click Here](https://docs.google.com/document/d/1UCbBnhNDKBHi3setIF5jUazahVgzSWuCw-hhCAPljsg/edit?usp=sharing)
 ------------------------------------------------------------------------------------------------------------------------------
 
 ## Getting Up and Running
@@ -35,5 +35,15 @@ This web application is a prototype online store for the customers of Service Pa
  - As a sales rep, I only want to see the customer id, the item codes and quantities, so that I can enter the order more quickly.
  - As a customer, I want to know about the company I am ordering from, so that I know they are a trust-worthy supplier.
  
- 
+
 ------------------------------------------------------------------------------------------------------------------------------
+
+### About the Team!
+
+See more of Ellen's work [Here](https://github.com/egconley)
+
+See more of Hai's work [Here](https://github.com/haitle16)
+
+See more of Rachael's work [Here](https://github.com/Rachnicrice)
+
+See more of Shingo's work [Here](https://github.com/shingoed)
