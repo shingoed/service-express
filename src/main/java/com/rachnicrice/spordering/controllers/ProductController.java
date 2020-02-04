@@ -45,7 +45,7 @@ public class ProductController {
         }
 
         model.addAttribute("data", productRepository.findAll());
-
+        System.out.println(productRepository.findAll().toString());
         model.addAttribute("currentPage",page);
         return "products";
     }
@@ -55,25 +55,25 @@ public class ProductController {
 //        System.out.println(quantity);
 
         int i = Integer.parseInt(quantity);
-        System.out.println(i);
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-        List<Order> userOrder = applicationUserRepository.findByUsername(p.getName()).getOrders();
+        // Test if the user has an order object in the DB
+        if (applicationUserRepository.findByUsername(p.getName()).getOrders() != null) {
+            List<Order> userOrder = applicationUserRepository.findByUsername(p.getName()).getOrders();
 
-        if(userOrder.get(0).getSubmitted() == false && !userOrder.isEmpty()){ // Check to see if userOrder have existing order and isSubmitted is false
-            LineItem cartItem = new LineItem(userOrder, product, i);// create new cart item with order, product, and quantity
-            System.out.println(cartItem.toString());
-            lineItemRepository.save(cartItem);
+            if(!userOrder.get(0).getSubmitted()){ // Check to see if userOrder have existing order and isSubmitted is false
+                LineItem cartItem = new LineItem(userOrder.get(0), productRepository.getOne((long) 1), i);// create new cart item with order, product, and quantity
+                lineItemRepository.save(cartItem);
+            } else { // If all orders are already submitted
 
-        }else { // If it doesnt have any order or have submitted order
-            Order order = new Order(applicationUserRepository.findByUsername(p.getName()),createdAt,false);
+            }
+        } else {
+            //If no orders exist, make one
+            Order order = new Order(applicationUserRepository.findByUsername(p.getName()), createdAt,false);
             orderRepository.save(order);
-            LineItem cartItem = new LineItem((Order) userOrder, product, i);// create new cart item with order, product, and quantity
+            LineItem cartItem = new LineItem(order, productRepository.getOne((long) 1), i);// create new cart item with order, product, and quantity
             lineItemRepository.save(cartItem);
-
         }
-
-
 
         return new RedirectView("/mycart");
     }
