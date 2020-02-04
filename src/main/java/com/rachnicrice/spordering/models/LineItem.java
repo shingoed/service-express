@@ -56,13 +56,8 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    @Override
-    public String toString() {
-        return "LineItem{" +
-                "id=" + id +
-                ", product=" + product +
-                ", quantity=" + quantity +
-                ", order=" + order +
-                '}';
+    public Long getId() {
+        return id;
     }
+
 }

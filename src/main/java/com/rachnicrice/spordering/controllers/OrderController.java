@@ -4,8 +4,11 @@ import com.rachnicrice.spordering.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
 import java.sql.Timestamp;
 
 import java.security.Principal;
@@ -46,7 +49,7 @@ public class OrderController {
         for (Order order : userOrders) {
             if (order.getSubmitted()==false) {
                 Order unsubmittedOrder = order;
-                List<LineItem> lineItems = order.getItemsInThisOrder();
+                List<LineItem> lineItems = unsubmittedOrder.getItemsInThisOrder();
                 List<Product> cartProducts = new LinkedList<>();
                 for (LineItem item : lineItems) {
                     Product cartProduct = item.getProduct();
@@ -59,5 +62,18 @@ public class OrderController {
         model.addAttribute("currentPage",page);
 
         return "mycart";
+    }
+
+    @DeleteMapping("/mycart/{id}")
+    public RedirectView deletePost(@PathVariable long id, Principal p) {
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+        LineItem lineItem = lineItemRepository.getOne(id);
+
+//        if (loggedInUser.)
+//        if (loggedInUser.get().contains(post)) {
+//            postRepository.deleteById(id);
+//        }
+
+        return new RedirectView("/");
     }
 }
