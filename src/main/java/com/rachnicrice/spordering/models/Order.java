@@ -17,7 +17,8 @@ public class Order {
     private Long order_id;
 
     Date date_created;
-    Boolean isSubmitted;
+    Date date_submitted;
+    boolean isSubmitted;
 
     @ManyToOne
     ApplicationUser user;
@@ -31,6 +32,17 @@ public class Order {
         this.user = user;
         this.date_created = date_created;
         this.isSubmitted = isSubmitted;
+    }
+
+    public Date getDate_submitted() {
+        return date_submitted;
+    }
+
+    public Order(ApplicationUser user, Date date_created, Boolean isSubmitted, Date date_submitted) {
+        this.user = user;
+        this.date_created = date_created;
+        this.isSubmitted = isSubmitted;
+        this.date_submitted = date_submitted;
     }
 
     public Long getOrder_id() {

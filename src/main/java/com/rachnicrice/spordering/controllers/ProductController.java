@@ -50,25 +50,6 @@ public class ProductController {
         return "products";
     }
 
-    @GetMapping("/mycart")
-    public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
-//        PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
-
-        if(p != null) {
-            System.out.println(p.getName()+" is logged in!");
-            model.addAttribute("username", p.getName());
-        } else {
-            System.out.println("nobody is logged in");
-        }
-
-        model.addAttribute("data", productRepository.findAll());
-
-        model.addAttribute("currentPage",page);
-
-
-        return "mycart";
-    }
-
     @PostMapping("/mycart")
     public RedirectView addCart(Model model, Principal p, String quantity, Product product) {
 //        System.out.println(quantity);
@@ -118,18 +99,4 @@ public class ProductController {
         return productRepository.getOne(id);
 
     }
-
-    @GetMapping("/profile")
-
-    public String getProfile(Model model, Principal p){
-        if(p != null) {
-            System.out.println(p.getName()+" is logged in!");
-            model.addAttribute("username", p.getName());
-        } else {
-            System.out.println("nobody is logged in");
-        }
-        return "profile";
-    }
-
-
 }
