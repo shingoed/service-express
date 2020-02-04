@@ -37,3 +37,13 @@ This web application is a prototype online store for the customers of Service Pa
  
  
 ------------------------------------------------------------------------------------------------------------------------------
+
+### About the Team!
+
+See more of Ellen's work [Here](https://github.com/egconley)
+
+See more of Hai's work [Here](https://github.com/haitle16)
+
+See more of Rachael's work [Here](https://github.com/Rachnicrice)
+
+See more of Shingo's work [Here](https://github.com/shingoed)
