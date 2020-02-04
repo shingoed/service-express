@@ -249,7 +249,7 @@ input.btn.btn-primary {
 
 /* Login CSS End ---------------------------------------------------------*/
 
-/* *************************************ABOUT US************************************** */
+/* *************************************ORIGINAL ABOUTUS CSS************************************** */
 
 .flex {
   display: flex;
@@ -267,7 +267,7 @@ input.btn.btn-primary {
 }
 
 .github-logo {
-  max-width:2%;
+  max-width:7%;
   max-height: 2%;
 }
 
@@ -289,3 +289,10 @@ padding:10px;
   max-width:25%;
   max-height: 25%;
 }
+
+.readable{
+
+font-size: 10px;
+}
+
+*************************

@@ -2,6 +2,7 @@ package com.rachnicrice.spordering.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class LineItem {
@@ -26,6 +27,9 @@ public class LineItem {
         this.order = order;
         this.product = product;
         this.quantity = quantity;
+    }
+
+    public LineItem(List<Order> userOrder, Product product, int quantity) {
     }
 
     public Order getOrder() {
