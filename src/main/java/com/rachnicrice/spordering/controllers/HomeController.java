@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -66,10 +67,27 @@ public class HomeController {
         }
     }
 
-    @GetMapping("/aboutus")
+    @GetMapping("/about-us")
     public String getAboutUs(){
-        return "aboutus";
+        return "about-us";
     }
+
+    @GetMapping("/contactus")
+    public String getContactUs(){
+        return "contactus";
+    }
+
+    @GetMapping("/profile")
+    public String getProfile(Model model, Principal p){
+        if(p != null) {
+            System.out.println(p.getName()+" is logged in!");
+            model.addAttribute("username", p.getName());
+        } else {
+            System.out.println("nobody is logged in");
+        }
+        return "profile";
+    }
+
 
 }
 

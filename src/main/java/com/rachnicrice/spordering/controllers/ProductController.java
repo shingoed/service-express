@@ -112,18 +112,4 @@ public class ProductController {
         return productRepository.getOne(id);
 
     }
-
-    @GetMapping("/profile")
-
-    public String getProfile(Model model, Principal p){
-        if(p != null) {
-            System.out.println(p.getName()+" is logged in!");
-            model.addAttribute("username", p.getName());
-        } else {
-            System.out.println("nobody is logged in");
-        }
-        return "profile";
-    }
-
-
 }
