@@ -78,7 +78,7 @@ public class OrderController {
             System.out.println("made to spot where the delete will happen");
         }
 
-        return new RedirectView("/");
+        return new RedirectView("/mycart");
     }
 
     // update to match route in form
@@ -95,6 +95,6 @@ public class OrderController {
             System.out.println("made to spot where the delete will happen");
         }
 
-        return new RedirectView("/");
+        return new RedirectView("/mycart");
     }
 }
