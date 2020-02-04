@@ -66,7 +66,7 @@ public class OrderController {
     }
 
     // update to match route in form
-    @DeleteMapping("/mycart/{id}")
+    @DeleteMapping("/mycart/delete/{id}")
     public RedirectView deleteLineItem(@PathVariable long id, Principal p) {
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
         LineItem lineItem = lineItemRepository.getOne(id);
@@ -82,7 +82,7 @@ public class OrderController {
     }
 
     // update to match route in form
-    @PostMapping("/mycart/{id}")
+    @PostMapping("/mycart/edit/{id}")
     public RedirectView updateQuantity(@PathVariable long id, Principal p, int quantity) {
 
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
