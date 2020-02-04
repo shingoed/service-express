@@ -26,9 +26,13 @@ public class HomeController {
     PasswordEncoder encoder;
 
     @GetMapping("/")
-    public String getHome() {
+    public String getHome(Model m,Principal p) {
+        //Check is the user is logged in
+        //If they are pass their username to the template
+        if (p != null) {
+            m.addAttribute("username", p.getName());
+        }
         return "home";
-        // make sure add in the username attribute, p.getname on every route so the logged in user can see a different nav bar.
     }
 
     @GetMapping("/login")
