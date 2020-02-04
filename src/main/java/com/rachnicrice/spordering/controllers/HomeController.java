@@ -26,7 +26,13 @@ public class HomeController {
     PasswordEncoder encoder;
 
     @GetMapping("/")
-    public String getHome() {
+    public String getHome(Model model, Principal p) {
+        if(p != null) {
+            System.out.println(p.getName()+" is logged in!");
+            model.addAttribute("username", p.getName());
+        } else {
+            System.out.println("nobody is logged in");
+        }
         return "home";
         // make sure add in the username attribute, p.getname on every route so the logged in user can see a different nav bar.
     }
