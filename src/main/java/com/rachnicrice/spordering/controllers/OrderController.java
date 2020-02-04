@@ -46,7 +46,6 @@ public class OrderController {
         for (Order order : userOrders) {
             if (order.getSubmitted()==false) {
                 Order unsubmittedOrder = order;
-                System.out.println("cart order: " + unsubmittedOrder);
                 List<LineItem> lineItems = order.getItemsInThisOrder();
                 List<Product> cartProducts = new LinkedList<>();
                 for (LineItem item : lineItems) {
