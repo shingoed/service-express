@@ -4,10 +4,7 @@ import com.rachnicrice.spordering.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import java.sql.Timestamp;
 
@@ -68,8 +65,9 @@ public class OrderController {
         return "mycart";
     }
 
+    // update to match route in form
     @DeleteMapping("/mycart/{id}")
-    public RedirectView deletePost(@PathVariable long id, Principal p) {
+    public RedirectView deleteLineItem(@PathVariable long id, Principal p) {
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
         LineItem lineItem = lineItemRepository.getOne(id);
 
@@ -77,6 +75,23 @@ public class OrderController {
 
         if (loggedInUser == userAssociatedWithLineItem) {
 //            lineItemRepository.getOne(id);
+            System.out.println("made to spot where the delete will happen");
+        }
+
+        return new RedirectView("/");
+    }
+
+    // update to match route in form
+    @PostMapping("/mycart/{id}")
+    public RedirectView updateQuantity(@PathVariable long id, Principal p, int quantity) {
+
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+        LineItem lineItem = lineItemRepository.getOne(id);
+
+        ApplicationUser userAssociatedWithLineItem = lineItem.getOrder().getUser();
+
+        if (loggedInUser == userAssociatedWithLineItem) {
+            lineItem.setQuantity(quantity);
             System.out.println("made to spot where the delete will happen");
         }
 
