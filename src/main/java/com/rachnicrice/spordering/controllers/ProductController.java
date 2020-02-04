@@ -70,24 +70,24 @@ public class ProductController {
     }
 
     @PostMapping("/mycart")
-    public RedirectView addCart(Model model, Principal p, String quantity, Product product) {
-//        System.out.println(quantity);
+    public RedirectView addCart(Model model, Principal p, int quantity, Product product) {
+        System.out.println(quantity);
+        System.out.println(product);
 
-        int i = Integer.parseInt(quantity);
-        System.out.println(i);
+//        int i = Integer.parseInt(quantity);
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
         List<Order> userOrder = applicationUserRepository.findByUsername(p.getName()).getOrders();
 
         if(userOrder.get(0).getSubmitted() == false && !userOrder.isEmpty()){ // Check to see if userOrder have existing order and isSubmitted is false
-            LineItem cartItem = new LineItem(userOrder, product, i);// create new cart item with order, product, and quantity
+            LineItem cartItem = new LineItem(userOrder, product, quantity);// create new cart item with order, product, and quantity
             System.out.println(cartItem.toString());
             lineItemRepository.save(cartItem);
 
         }else { // If it doesnt have any order or have submitted order
             Order order = new Order(applicationUserRepository.findByUsername(p.getName()),createdAt,false);
             orderRepository.save(order);
-            LineItem cartItem = new LineItem((Order) userOrder, product, i);// create new cart item with order, product, and quantity
+            LineItem cartItem = new LineItem((Order) userOrder, product, quantity);// create new cart item with order, product, and quantity
             lineItemRepository.save(cartItem);
 
         }
