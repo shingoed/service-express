@@ -19,6 +19,10 @@ public class LineItem {
     @ManyToOne
     Order order;
 
+    public LineItem() {
+
+    }
+
     public LineItem(Order order, Product product, int quantity) {
         this.order = order;
         this.product = product;
