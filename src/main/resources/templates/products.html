@@ -32,7 +32,7 @@
                         <td th:text="${product.color}"></td>
                         <td th:text="${product.style}"></td>
                         <td th:text="${product.type}"></td>
-                        <td><a class="btn btn-primary tocartBtn">Add to cart!</a>
+                        <td><a th:href="@{/mycart}" class="btn btn-primary tocartBtn">Add to cart!</a>
                             <a th:href="@{/findOne/(id=${product.id})}" class="btn btn-info infoBtn">View Details</a></td>
 
                     </tr>
