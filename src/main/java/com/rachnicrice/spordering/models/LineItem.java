@@ -8,19 +8,19 @@ public class LineItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long lineItem_id;
+    private Long id;
 
-    @OneToOne
-    Product lineItem;
+    @ManyToOne
+    Product product;
 
     int quantity;
 
     @ManyToOne
     Order order;
 
-    public LineItem(Order order, Product lineItem, int quantity) {
+    public LineItem(Order order, Product product, int quantity) {
         this.order = order;
-        this.lineItem = lineItem;
+        this.product = product;
         this.quantity = quantity;
     }
 
@@ -32,12 +32,12 @@ public class LineItem {
         this.order = order;
     }
 
-    public Product getLineItem() {
-        return lineItem;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setLineItem(Product lineItem) {
-        this.lineItem = lineItem;
+    public void setProduct(Product lineItem) {
+        this.product = lineItem;
     }
 
     public int getQuantity() {
