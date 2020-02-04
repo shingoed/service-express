@@ -52,4 +52,8 @@ public class LineItem {
         this.quantity = quantity;
     }
 
+    public Long getId() {
+        return id;
+    }
+
 }
