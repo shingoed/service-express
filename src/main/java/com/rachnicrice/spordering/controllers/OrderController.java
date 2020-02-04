@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.sql.Timestamp;
 
 import java.security.Principal;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -29,11 +30,9 @@ public class OrderController {
 
     @GetMapping("/mycart")
     public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
-//        PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+//      PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
 
-        System.out.println("you made it!!");
-
-        if(p != null) {
+        if (p != null) {
             System.out.println(p.getName()+" is logged in!");
             model.addAttribute("username", p.getName());
         } else {
@@ -41,22 +40,22 @@ public class OrderController {
         }
 
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+
         List<Order> userOrders = loggedInUser.getOrders();
-        System.out.println("user orders -----> " + userOrders);
+
         for (Order order : userOrders) {
-            System.out.println("submitted values for orders" + order.getSubmitted());
+            if (order.getSubmitted()==false) {
+                Order unsubmittedOrder = order;
+                System.out.println("cart order: " + unsubmittedOrder);
+                List<LineItem> lineItems = order.getItemsInThisOrder();
+                List<Product> cartProducts = new LinkedList<>();
+                for (LineItem item : lineItems) {
+                    Product cartProduct = item.getProduct();
+                    cartProducts.add(cartProduct);
+                }
+                model.addAttribute("data", cartProducts);
+            }
         }
-
-
-
-        Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-
-//        applicationUserRepository.findByUsername(p.getName()),createdAt,false);
-
-//        System.out.println(applicationUserRepository.findByUsername(p.getName()).getOrders()); // return []
-
-        // Ellen - turn this into a query that returns from orderRepo.
-//        model.addAttribute("data", productRepository.findAll());
 
         model.addAttribute("currentPage",page);
 
