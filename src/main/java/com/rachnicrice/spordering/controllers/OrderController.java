@@ -46,16 +46,20 @@ public class OrderController {
 
         List<Order> userOrders = loggedInUser.getOrders();
 
-        for (Order order : userOrders) {
-            if (order.getSubmitted()==false) {
-                Order unsubmittedOrder = order;
-                List<LineItem> lineItems = unsubmittedOrder.getItemsInThisOrder();
-                List<Product> cartProducts = new LinkedList<>();
-                for (LineItem item : lineItems) {
-                    Product cartProduct = item.getProduct();
-                    cartProducts.add(cartProduct);
+        System.out.println("are user orders null? " + userOrders==null);
+
+        if (userOrders!=null) {
+            for (Order order : userOrders) {
+                if (order.getSubmitted()==false) {
+                    Order unsubmittedOrder = order;
+                    List<LineItem> lineItems = unsubmittedOrder.getItemsInThisOrder();
+                    List<Product> cartProducts = new LinkedList<>();
+                    for (LineItem item : lineItems) {
+                        Product cartProduct = item.getProduct();
+                        cartProducts.add(cartProduct);
+                    }
+                    model.addAttribute("data", cartProducts);
                 }
-                model.addAttribute("data", cartProducts);
             }
         }
 
@@ -69,10 +73,12 @@ public class OrderController {
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
         LineItem lineItem = lineItemRepository.getOne(id);
 
-//        if (loggedInUser.)
-//        if (loggedInUser.get().contains(post)) {
-//            postRepository.deleteById(id);
-//        }
+        ApplicationUser userAssociatedWithLineItem = lineItem.getOrder().getUser();
+
+        if (loggedInUser == userAssociatedWithLineItem) {
+//            lineItemRepository.getOne(id);
+            System.out.println("made to spot where the delete will happen");
+        }
 
         return new RedirectView("/");
     }
