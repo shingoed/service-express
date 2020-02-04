@@ -8,12 +8,31 @@
 <body>
 <nav th:replace="fragments/common :: navbar"></nav>
 
+<div class="container">
+    <div class="row">
 
+        <div class="col-md-7 ">
 
+            <div class="panel panel-default">
+                <div class="panel-heading">  <h4>User Profile</h4></div>
+                <div class="panel-body">
 
+                    <div class="box box-info">
 
+                        <div class="box-body">
+                                <h4 style="color:#00b1b1;"> username: [[${username}]] </h4>
 
+                            <p>First Name: [[${firstName}]] </p>
+                            <p>Last Name: [[${lastName}]] </p>
+                            <p>Email: [[${email}]] </p>
 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
