@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <th:block th:replace="fragments/common :: head"> </th:block>
+</head>
+<body>
+    <nav th:replace="fragments/common :: navbar"></nav>
+    <div class="container">
+        <div class="card">
+            <div class="card-block">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>ItemCode ??</th>
+                        <th>Name</th>
+                        <th>Width</th>
+                        <th>Length</th>
+                        <th>Color</th>
+                        <th>Style</th>
+                        <th>Type</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="product : ${data}">
+                        <td th:text="${product.itemCode}"></td>
+                        <td th:text="${product.itemName}"></td>
+                        <td th:text="${product.width}"></td>
+                        <td th:text="${product.length}"></td>
+                        <td th:text="${product.color}"></td>
+                        <td th:text="${product.style}"></td>
+                        <td th:text="${product.type}"></td>
+                        <td><a class="btn btn-primary tocartBtn">Add to cart!</a>
+                            <a th:href="@{/findOne/(id=${product.id})}" class="btn btn-info infoBtn">View Details</a></td>
+
+                    </tr>
+                    </tbody>
+
+                </table>
+                <!--                horizontal line-->
+                <hr/>
+                <ul class="nav nav-pills">
+<!--                    <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages-1)}">-->
+<!--                        <a th:href="@{/product/(page=${i})}" th:text="${i}" class="nav-link" th:classappend="${currentPage} ==${i}?'active':''"></a>-->
+<!--                        &lt;!&ndash;                        ternary operator if there is current page, set active to have a box showing what page your on.&ndash;&gt;-->
+<!--                    </li>-->
+
+                </ul>
+            </div>
+
+        </div>
+        <!-- Got this form from bootstrap 4-->
+        <div class="myForm">
+            <form th:action="@{/save}" method="POST">
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Update or Create</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="id" name="id" value=" "/>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="itemCode" class="col-form-label">Item Code:</label>
+                                    <input type="text" class="form-control" id="itemCode" name="itemCode" value=" "/>
+                                    <input type="hidden" name="_method" value="UPDATE" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-form-label">Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" value=" "/>
+                                    <input type="hidden" name="_method" value="UPDATE" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="length" class="col-form-label">Length:</label>
+                                    <input type="text" class="form-control" id="length" name="length" value=" "/>
+                                    <input type="hidden" name="_method" value="UPDATE" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="width" class="col-form-label">Width:</label>
+                                    <input type="text" class="form-control" id="width" name="width" value=" "/>
+                                    <input type="hidden" name="_method" value="UPDATE" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="color" class="col-form-label">Color:</label>
+                                    <input type="text" class="form-control" id="color" name="color" value=" "/>
+                                    <input type="hidden" name="_method" value="UPDATE" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="style" class="col-form-label">Style:</label>
+                                    <input type="text" class="form-control" id="style" name="style" value=" "/>
+                                    <input type="hidden" name="_method" value="UPDATE" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="type" class="col-form-label">Type:</label>
+                                    <input type="text" class="form-control" id="type" name="type" value=" "/>
+                                    <input type="hidden" name="_method" value="UPDATE" />
+                                </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary" value="save"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    </div>
+
+</body>
+</html>

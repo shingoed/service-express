@@ -35,7 +35,7 @@ This web application is a prototype online store for the customers of Service Pa
  - As a sales rep, I only want to see the customer id, the item codes and quantities, so that I can enter the order more quickly.
  - As a customer, I want to know about the company I am ordering from, so that I know they are a trust-worthy supplier.
  
- 
+
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### About the Team!
