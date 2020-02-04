@@ -61,11 +61,11 @@ public class ProductController {
         List<Order> userOrder = applicationUserRepository.findByUsername(p.getName()).getOrders();
 
         if(userOrder.get(0).getSubmitted() == false && !userOrder.isEmpty()){ // Check to see if userOrder have existing order and isSubmitted is false
-            LineItem cartItem = new LineItem(userOrder, product, i);// create new cart item with order, product, and quantity
+            LineItem cartItem = new LineItem(userOrder.get(0), productRepository.getOne((long) 1), i);// create new cart item with order, product, and quantity
             System.out.println(cartItem.toString());
             lineItemRepository.save(cartItem);
 
-        }else { // If it doesnt have any order or have submitted order
+        }else { // If it doesn't have any order or have submitted order
             Order order = new Order(applicationUserRepository.findByUsername(p.getName()),createdAt,false);
             orderRepository.save(order);
             LineItem cartItem = new LineItem((Order) userOrder, product, i);// create new cart item with order, product, and quantity
