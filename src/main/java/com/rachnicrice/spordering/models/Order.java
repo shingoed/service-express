@@ -25,6 +25,8 @@ public class Order {
     @OneToMany(mappedBy = "order")
     List<LineItem> lineItemsInThisOrder;
 
+    public Order() {}
+
     public Order(ApplicationUser user, Date date_created, Boolean isSubmitted) {
         this.user = user;
         this.date_created = date_created;

@@ -25,9 +25,9 @@
                 </thead>
 
                 <tbody>
-                <tr th:each="product : ${data.content}">
+                <tr th:each="product : ${data}">
                     <td th:text="${product.itemCode}"></td>
-                    <td th:text="${product.name}"></td>
+                    <td th:text="${product.itemName}"></td>
                     <td th:text="${product.width}"></td>
                     <td th:text="${product.length}"></td>
                     <td th:text="${product.color}"></td>
@@ -43,10 +43,10 @@
             <!--                horizontal line-->
             <hr/>
             <ul class="nav nav-pills">
-                <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages-1)}">
-                    <a th:href="@{/product/(page=${i})}" th:text="${i}" class="nav-link" th:classappend="${currentPage} ==${i}?'active':''"></a>
-                    <!--                        ternary operator if there is current page, set active to have a box showing what page your on.-->
-                </li>
+<!--                <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages-1)}">-->
+<!--                    <a th:href="@{/product/(page=${i})}" th:text="${i}" class="nav-link" th:classappend="${currentPage} ==${i}?'active':''"></a>-->
+<!--                    &lt;!&ndash;                        ternary operator if there is current page, set active to have a box showing what page your on.&ndash;&gt;-->
+<!--                </li>-->
 
             </ul>
         </div>
@@ -72,7 +72,7 @@
                                 <input type="hidden" class="form-control" id="itemCode" name="itemCode" value=" "/>
                             </div>
                             <div class="form-group">
-                                <input type="hidden" class="form-control" id="name" name="name" value=" "/>
+                                <input type="hidden" class="form-control" id="itemName" name="itemName" value=" "/>
                             </div>
                             <div class="form-group">
                                 <input type="hidden" class="form-control" id="length" name="length" value=" "/>

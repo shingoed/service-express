@@ -32,7 +32,7 @@
                         <td th:text="${product.color}"></td>
                         <td th:text="${product.style}"></td>
                         <td th:text="${product.type}"></td>
-                        <td><a class="btn btn-primary tocartBtn">Add to cart!</a>
+                        <td><a th:href="@{/mycart}" class="btn btn-primary tocartBtn">Add to cart!</a>
                             <a th:href="@{/findOne/(id=${product.id})}" class="btn btn-info infoBtn">View Details</a></td>
 
                     </tr>
@@ -43,7 +43,7 @@
                 <hr/>
                 <ul class="nav nav-pills">
 <!--                    <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages-1)}">-->
-<!--                        <a th:href="@{/product/(page=${i})}" th:text="${i}" class="nav-link" th:classappend="${currentPage} ==${i}?'active':''"></a>-->
+<!--                        <a th:href="@{/products/(page=${i})}" th:text="${i}" class="nav-link" th:classappend="${currentPage} ==${i}?'active':''"></a>-->
 <!--                        &lt;!&ndash;                        ternary operator if there is current page, set active to have a box showing what page your on.&ndash;&gt;-->
 <!--                    </li>-->
 

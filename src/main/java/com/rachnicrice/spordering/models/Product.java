@@ -68,14 +68,6 @@ public class Product {
         this.item_id = id;
     }
 
-    public String getName() {
-        return itemName;
-    }
-
-    public void setName(String name) {
-        this.itemName = name;
-    }
-
     public String getItemCode() {
         return itemCode;
     }
@@ -122,6 +114,18 @@ public class Product {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public int getOrderIncrement() {
+        return orderIncrement;
     }
 
     @Override
