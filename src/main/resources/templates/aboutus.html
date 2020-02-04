@@ -3,74 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>About Us</title>
-    <link rel="stylesheet" href="./style/style.css">
+    <th:block th:replace="fragments/common :: head"> </th:block>
 </head>
 
-<!--<body>-->
-<!--<div class="frame" class=flex>-->
-<!--    <a id="home-button-aboutus" class="nav-button" href="/" target="_self">Home</a>-->
-<!--    <br><br><br>-->
+<body>
+<nav th:replace="fragments/common :: navbar"></nav>
+<div class="frame" class=flex>
+    <a id="home-button-aboutus" class="nav-button" href="/" target="_self">Home</a>
+    <br><br><br>
 
-<!--    <div class="dev-content">-->
-<!--        <h1>Meet the Team</h1>-->
-<!--        <br>-->
-<!--        <p class=readable>We have created a .........-->
-<!--        </p>-->
-<!--        <br>-->
-<!--    </div>-->
+    <div class="dev-content">
+        <h1>Meet the Team</h1>
+        <br>
+        <p class=readable>We have created a ordering website!!
+        </p>
+        <br>
+    </div>
 
-<!--    <br>-->
+    <br>
 
-<!--    <div class=profile-img>-->
-<!--        <img src="/styles/pics/peter.jpg" class="pic">-->
-<!--    </div>-->
-<!--    <div>-->
+    <div class=profile-img>
+        <img src="/styles/pics/rachael.jpg" class="pic">
+    </div>
+    <div>
 
-<!--        <p class=bold-name>Peter Cole <a href="https://github.com/petercole3" target="_blank"><img-->
-<!--                src="/styles/pics/github_PNG58.png" class="github-logo"></a><a-->
-<!--                href="https://www.linkedin.com/in/petercole3/" target="_blank"><img src="/styles/pics/li.png"-->
-<!--                                                                                    class="github-logo"></a></p>-->
-<!--        <p class=readable>-->
-<!--            Hi! I am a 28 year old software engineer. Web development in the outdoor industry is where I am trying to-->
-<!--            find my next home, but AI for the automotive industry and CNC machining software also intrigue me. I value-->
-<!--            a community driven and empowering work environment. Outside of work, I volunteer with a mountaineering-->
-<!--            nonprofit and play the tuba.-->
-<!--        </p><br>-->
-<!--    </div>-->
+        <p class=bold-name>Ellen Conley <a href="https://github.com/egconley" target="_blank"><img
+                src="/styles/pics/github_PNG58.png" class="github-logo"></a><a
+                href="https://www.linkedin.com/in/ellenconley/" target="_blank"><img src="/styles/pics/li.png"
+                                                                                    class="github-logo"></a></p>
+        <p class=readable>
+            Hi! I am.........
+        </p><br>
+    </div>
 
-<!--    <div class=profile-img>-->
-<!--        <img src="/styles/pics/Brandon.jpg" class="pic">-->
-<!--    </div>-->
-<!--    <div>-->
+    <div class=profile-img>
+        <img src="/styles/pics/hai.jpg" class="pic">
+    </div>
+    <div>
+        <p class=bold-name>Hai Le<a href="https://github.com/haitle16" target="_blank"><img
+                src="/styles/pics/github_PNG58.png" class="github-logo"></a><a
+                href="https://www.linkedin.com/in/haitle16/" target="_blank"><img src="/styles/pics/li.png"
+                                                                                                   class="github-logo"></a></p>
+        <p class=readable>
+            My name is .......
+        </p><br>
+    </div>
 
-<!--        <p class=bold-name>Brandon Johnson <a href="https://github.com/splintercel3000" target="_blank"><img-->
-<!--                src="/styles/pics/github_PNG58.png" class="github-logo"></a><a-->
-<!--                href="https://www.linkedin.com/in/brandon-johnson-33a581109/" target="_blank"><img src="/styles/pics/li.png"-->
-<!--                                                                                                   class="github-logo"></a></p>-->
-<!--        <p class=readable>-->
-<!--            My name is Brandon Johnson and I am a 23 year old Software Developer. I have a background in Computer Science-->
-<!--            including minor knowledge of the languages C++ and Python. More recently I have a background in retail to build-->
-<!--            up around customer service.-->
-<!--        </p><br>-->
-<!--    </div>-->
+    <div class=profile-img>
+        <img src="/styles/pics/rachael.jpeg" class="pic">
+    </div>
+    <div>
 
-<!--    <div class=profile-img>-->
-<!--        <img src="/styles/pics/shingo.jpeg" class="pic">-->
-<!--    </div>-->
-<!--    <div>-->
+        <p class=bold-name>Rachael Rice <a href="https://github.com/Rachnicrice" target="_blank"><img
+                src="/styles/pics/github_PNG58.png" class="github-logo"></a><a href="https://www.linkedin.com/in/rachaelrice/"
+                                                                               target="_blank"><img src="/styles/pics/li.png" class="github-logo"></a></p>
+        <p class=readable>
+            Rachael, a once customer service expert turned software developer, was inspired to create Service Express through her own experience as a sales rep. She is dedicated to creating solutions through client-focused design and by prioritizing user experience. When she is not studying data structures and algorithms, you can find her binge watching Netflix shows with her partner Sean.
+        </p>
+    </div>
 
-<!--        <p class=bold-name>Shingo Nakajima <a href="https://github.com/shingoed" target="_blank"><img-->
-<!--                src="/styles/pics/github_PNG58.png" class="github-logo"></a><a href="https://www.linkedin.com/in/shingoed/"-->
-<!--                                                                               target="_blank"><img src="/styles/pics/li.png" class="github-logo"></a></p>-->
-<!--        <p class=readable>-->
-<!--            I am a software developer and I like to build apps. I decided to dive into the-->
-<!--            world-->
-<!--            of software development because I became-->
-<!--            interested in building my own apps. I am dedicated, hardworking and motivated to-->
-<!--            bring great ideas into reality.-->
-<!--        </p>-->
-<!--    </div>-->
-<!--</div>-->
-<!--</body>-->
+    <div class=profile-img>
+        <img src="/styles/pics/shingo.jpeg" class="pic">
+    </div>
+    <div>
+
+        <p class=bold-name>Shingo Nakajima <a href="https://github.com/shingoed" target="_blank"><img
+                src="/styles/pics/github_PNG58.png" class="github-logo"></a><a href="https://www.linkedin.com/in/shingoed/"
+                                                                               target="_blank"><img src="/styles/pics/li.png" class="github-logo"></a></p>
+        <p class=readable>
+            Shingo, a passionate coder coming from Code Fellows bootcamp with expertise in agile development methodology and experience with software development using continuous integration/deployment pipeline. A motivated team player who is highly proficient in Java and well versed in JavaScript with experience building Android apps.A passionate coder coming from Code Fellows bootcamp with expertise in agile development methodology and experience with software development using continuous integration/deployment pipeline. A motivated team player who is highly proficient in Java and well versed in JavaScript with experience building Android apps.
+        </p>
+    </div>
+</div>
+</body>
 
 </html>
