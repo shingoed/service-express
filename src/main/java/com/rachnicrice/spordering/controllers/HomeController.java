@@ -100,7 +100,7 @@ public class HomeController {
             List<ApplicationUser> user  = (List<ApplicationUser>) applicationUserRepository.findByUsername(p.getName());
             model.addAttribute("username", p.getName());
 
-            model.addAttribute("firstName",.getName());
+            model.addAttribute("firstName",p.getName());
 
             model.addAttribute("lastName",p.getName());
 
