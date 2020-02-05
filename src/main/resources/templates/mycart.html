@@ -24,6 +24,10 @@
                 </tr>
                 </thead>
 
+                <div th:if="${param.submitted}" class="wrapper fadeInDown">
+                    <p>Your order has been successfully submitted! Thank you for your business</p>
+                </div>
+
                 <tbody>
                 <tr th:each="product : ${data}">
                     <td th:text="${product.itemCode}"></td>
