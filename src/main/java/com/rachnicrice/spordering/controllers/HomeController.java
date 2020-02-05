@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -50,13 +51,17 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public RedirectView signup(String username, String password, String email, String phone, String firstName, String lastName) {
+    public RedirectView signup(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_number) {
         if (applicationUserRepository.findByUsername(username) == null) {
-            System.out.println(username);
-            System.out.println(password);
-            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName);
+            System.out.println("username: " + username);
+            System.out.println("password: " + password);
+            System.out.println("email: " + email);
+            System.out.println("lastName: " + lastName);
+            System.out.println("firstName: " + firstName);
+            System.out.println("spCustomer_number: " + spCustomer_number);
+            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName, spCustomer_number);
             applicationUserRepository.save(newUser);
-
+            System.out.println(newUser.toString());
 //            auto-login when people sign up
             Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -68,12 +73,24 @@ public class HomeController {
     }
 
     @GetMapping("/about-us")
-    public String getAboutUs(){
+    public String getAboutUs(Model model, Principal p){
+        if(p != null) {
+            System.out.println(p.getName()+" is logged in!");
+            model.addAttribute("username", p.getName());
+        } else {
+            System.out.println("nobody is logged in");
+        }
         return "about-us";
     }
 
     @GetMapping("/contactus")
-    public String getContactUs(){
+    public String getContactUs(Model model, Principal p){
+        if(p != null) {
+            System.out.println(p.getName()+" is logged in!");
+            model.addAttribute("username", p.getName());
+        } else {
+            System.out.println("nobody is logged in");
+        }
         return "contactus";
     }
 
@@ -81,7 +98,11 @@ public class HomeController {
     public String getProfile(Model model, Principal p){
         if(p != null) {
             System.out.println(p.getName()+" is logged in!");
-            model.addAttribute("username", p.getName());
+
+//            System.out.println("USER DATA"+applicationUserRepository.findByUsername(p.getName()).toString());
+//            List<ApplicationUser> user  = (List<ApplicationUser>) applicationUserRepository.findByUsername(p.getName());
+            model.addAttribute("user", applicationUserRepository.findByUsername(p.getName()));
+
         } else {
             System.out.println("nobody is logged in");
         }
