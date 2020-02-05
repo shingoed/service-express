@@ -8,27 +8,40 @@
 <body>
 <nav th:replace="fragments/common :: navbar"></nav>
 
+
 <div class="container">
     <div class="row">
+        <div class="col-lg-10 col-xl-9 mx-auto">
+            <div class="card card-signin flex-row my-5">
+                <div class="card-img-left d-none d-md-flex">
+                    <!-- Background image for card set in CSS! -->
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title text-center">Profile</h5>
 
-        <div class="col-md-7 ">
-
-            <div class="panel panel-default">
-                <div class="panel-heading">  <h4>User Profile</h4></div>
-                <div class="panel-body">
-
-                    <div class="box box-info">
-
-                        <div class="box-body">
-                                <h4 style="color:#00b1b1;"> username: [[${username}]] </h4>
-
-                            <p>First Name: [[${firstName}]] </p>
-                            <p>Last Name: [[${lastName}]] </p>
-                            <p>Email: [[${email}]] </p>
-
+                        <div class="form-label-group">
+                            <h4>Username: [[${username}]]</h4>
                         </div>
+
+                        <hr>
+
+                        <div class="form-label-group">
+                           <p>Email address: [[${email}]] </p>
+                        </div>
+
+                        <hr>
+
+                    <div class="form-label-group">
+                        <p>First Name: [[${firstName}]] </p>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-label-group">
+                        <p>Last Name: [[${lastName}]] </p>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
