@@ -15,6 +15,7 @@ public class ApplicationUser implements UserDetails {
     Long user_id;
 
     String username;
+    String spCustomer_number;
     String password;
     String email;
     String phone;
@@ -40,14 +41,21 @@ public class ApplicationUser implements UserDetails {
         this.email = email;
     }
 
+    public ApplicationUser(String username, String password, String email, String spCustomer_number) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.spCustomer_number = spCustomer_number;
+    }
 
-    public ApplicationUser(String username, String password, String email, String phone, String firstName, String lastName) {
+    public ApplicationUser(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_number) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.spCustomer_number = spCustomer_number;
     }
 
 
@@ -89,6 +97,8 @@ public class ApplicationUser implements UserDetails {
         return lastName;
     }
 
+    public String getSpCustomer_number() { return spCustomer_number; }
+
     public List<Order> getOrders() {
         return orders;
     }
@@ -128,6 +138,7 @@ public class ApplicationUser implements UserDetails {
                 ", phone='" + phone + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", spCustomer_number='" + spCustomer_number + '\'' +
                 ", orders=" + orders +
                 '}';
     }
