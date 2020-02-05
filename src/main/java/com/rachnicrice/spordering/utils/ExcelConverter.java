@@ -1,22 +1,29 @@
 package com.rachnicrice.spordering.utils;
 
+import com.rachnicrice.spordering.models.LineItem;
+import com.rachnicrice.spordering.models.OrderRepository;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ByteArrayResource;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
+
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 //Resource: https://www.codejava.net/coding/how-to-write-excel-files-in-java-using-apache-poi
 //Resource: https://stackoverflow.com/questions/52078128/spring-boot-controller-export-an-excel
 public class ExcelConverter {
 
-    public static ByteArrayResource export(String filename) throws IOException {
+
+    public static ByteArrayResource export(String filename, Long id, OrderRepository repo) throws IOException {
         byte[] bytes = new byte[1024];
-        try (Workbook workbook = (Workbook) generateExcel()) {
+        try (Workbook workbook = (Workbook) generateExcel(id, repo)) {
             FileOutputStream fos = write(workbook, filename);
             fos.write(bytes);
             fos.flush();
@@ -28,32 +35,23 @@ public class ExcelConverter {
 
     //Change from AutoCloseable to Workbook if this does not work
     //Had to change to AutoCloseable due to version changes from Apache 3.9 to 4.0
-    public static AutoCloseable generateExcel() {
+    public static AutoCloseable generateExcel(Long id, OrderRepository repo) {
         Workbook workbook = new XSSFWorkbook();
         Sheet sheet = workbook.createSheet("Order");
 
         //create columns and rows
-        Object[][] bookData = {
-                {"Head First Java", "Kathy Serria", 79},
-                {"Effective Java", "Joshua Bloch", 36},
-                {"Clean Code", "Robert martin", 42},
-                {"Thinking in Java", "Bruce Eckel", 35},
-        };
+        List<LineItem> lineItems = repo.getOne(id).getItemsInThisOrder();
 
         int rowCount = 0;
 
-        for (Object[] aBook : bookData) {
+        for (LineItem item : lineItems) {
             Row row = sheet.createRow(++rowCount);
-            int columnCount = 0;
+            Cell itemCode = row.createCell(1);
+            Cell quantity = row.createCell(2);
 
-            for (Object field : aBook) {
-                Cell cell = row.createCell(++columnCount);
-                if (field instanceof String) {
-                    cell.setCellValue((String) field);
-                } else if (field instanceof Integer) {
-                    cell.setCellValue((Integer) field);
-                }
-            }
+            itemCode.setCellValue(item.getProduct().getItemCode());
+            quantity.setCellValue(item.getQuantity());
+
         }
 
         return (AutoCloseable) workbook;

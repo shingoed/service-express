@@ -1,5 +1,6 @@
 package com.rachnicrice.spordering.controllers;
 
+import com.rachnicrice.spordering.models.OrderRepository;
 import com.rachnicrice.spordering.utils.ExcelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
@@ -24,9 +25,11 @@ public class EmailController {
     @Autowired
     JavaMailSender jSender;
 
-    @PostMapping("/submit")
-    public RedirectView sendOrder (Principal p, Model m) {
+    @Autowired
+    OrderRepository repo;
 
+    @PostMapping("/submit")
+    public RedirectView sendOrder (Principal p, Model m, Long id) {
         //Resource: https://www.baeldung.com/spring-email
         //Create a new message
         MimeMessage message = jSender.createMimeMessage();
@@ -43,7 +46,7 @@ public class EmailController {
 
             //Create teh excel from the order data
             try {
-                Resource responseFile = ExcelConverter.export("order.xlsx");
+                Resource responseFile = ExcelConverter.export("order.xlsx", id, repo);
             } catch (IOException e) {
                 e.printStackTrace();
             }
