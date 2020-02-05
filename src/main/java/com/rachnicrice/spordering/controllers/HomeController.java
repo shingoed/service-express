@@ -54,9 +54,12 @@ public class HomeController {
         if (applicationUserRepository.findByUsername(username) == null) {
             System.out.println(username);
             System.out.println(password);
+            System.out.println(email);
+            System.out.println(lastName);
+            System.out.println(firstName);
             ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName);
             applicationUserRepository.save(newUser);
-
+            System.out.println(newUser.toString());
 //            auto-login when people sign up
             Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
             SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -68,12 +71,24 @@ public class HomeController {
     }
 
     @GetMapping("/about-us")
-    public String getAboutUs(){
+    public String getAboutUs(Model model, Principal p){
+        if(p != null) {
+            System.out.println(p.getName()+" is logged in!");
+            model.addAttribute("username", p.getName());
+        } else {
+            System.out.println("nobody is logged in");
+        }
         return "about-us";
     }
 
     @GetMapping("/contactus")
-    public String getContactUs(){
+    public String getContactUs(Model model, Principal p){
+        if(p != null) {
+            System.out.println(p.getName()+" is logged in!");
+            model.addAttribute("username", p.getName());
+        } else {
+            System.out.println("nobody is logged in");
+        }
         return "contactus";
     }
 
