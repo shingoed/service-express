@@ -21,6 +21,7 @@ public class ApplicationUser implements UserDetails {
     String phone;
     String firstName;
     String lastName;
+    String businessName;
 
     @OneToMany(mappedBy = "user")
     List<Order> orders;
@@ -41,11 +42,12 @@ public class ApplicationUser implements UserDetails {
         this.email = email;
     }
 
-    public ApplicationUser(String username, String password, String email, String spCustomer_number) {
+    public ApplicationUser(String username, String password, String email, String spCustomer_number, String businessName) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.spCustomer_number = spCustomer_number;
+        this.businessName = businessName;
     }
 
     public ApplicationUser(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_number) {
@@ -58,6 +60,16 @@ public class ApplicationUser implements UserDetails {
         this.spCustomer_number = spCustomer_number;
     }
 
+    public ApplicationUser(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_number, String businessName) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.spCustomer_number = spCustomer_number;
+        this.businessName = businessName;
+    }
 
     //instance methods
     @Override
@@ -102,6 +114,8 @@ public class ApplicationUser implements UserDetails {
     public List<Order> getOrders() {
         return orders;
     }
+
+    public String getBusinessName() { return businessName; }
 
 
     @Override
