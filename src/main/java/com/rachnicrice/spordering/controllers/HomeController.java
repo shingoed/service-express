@@ -99,8 +99,9 @@ public class HomeController {
             System.out.println(p.getName()+" is logged in!");
             List<ApplicationUser> user  = (List<ApplicationUser>) applicationUserRepository.findByUsername(p.getName());
             model.addAttribute("username", p.getName());
-
+            
             model.addAttribute("firstName",p.getName());
+
 
             model.addAttribute("lastName",p.getName());
 
