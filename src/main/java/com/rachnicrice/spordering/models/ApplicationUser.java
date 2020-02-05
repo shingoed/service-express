@@ -126,4 +126,18 @@ public class ApplicationUser implements UserDetails {
 
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "ApplicationUser{" +
+                "user_id=" + user_id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", orders=" + orders +
+                '}';
+    }
 }
