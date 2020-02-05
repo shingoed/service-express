@@ -32,12 +32,6 @@ public class OrderController {
 
     @GetMapping("/mycart")
     public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
-//      PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
-//        lineItemRepository.getOne((long)1).setQuantity(30);
-//        System.out.println("CART QUANTITY"+lineItemRepository.getOne((long)1).getQuantity());
-//        System.out.println("Order "+orderRepository.getOne((long)1).toString());
-
-
 
         if (p != null) {
             System.out.println(p.getName()+" is logged in!");
@@ -61,11 +55,8 @@ public class OrderController {
                     for (LineItem item : lineItems) {
                         Product cartProduct = item.getProduct();
                         cartProducts.add(cartProduct);
-                        System.out.println("ITEM QUANTITY" + item.getQuantity());
-
                     }
-                    model.addAttribute("itemQuantity", lineItems);
-                    model.addAttribute("data", cartProducts);
+                    model.addAttribute("dataList", lineItems);
 
                 }
             }
@@ -79,6 +70,7 @@ public class OrderController {
     // update to match route in form
     @DeleteMapping("/mycart/delete/{id}")
     public RedirectView deleteLineItem(@PathVariable long id, Principal p) {
+        System.out.println("MADE INTO DELETE MAPPING"+ id);
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
         LineItem lineItem = lineItemRepository.getOne(id);
 
@@ -87,6 +79,7 @@ public class OrderController {
         if (loggedInUser == userAssociatedWithLineItem) {
 //            lineItemRepository.getOne(id);
             System.out.println("made to spot where the delete will happen");
+
         }
 
         return new RedirectView("/mycart");
@@ -96,6 +89,8 @@ public class OrderController {
     @PostMapping("/mycart/edit/{id}")
     public RedirectView updateQuantity(@PathVariable long id, Principal p, int quantity) {
 
+        System.out.println("MADE INTO EDIT MAPPING"+ id + " QUANTITY "+ quantity);
+
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
         LineItem lineItem = lineItemRepository.getOne(id);
 
@@ -103,9 +98,18 @@ public class OrderController {
 
         if (loggedInUser == userAssociatedWithLineItem) {
             lineItem.setQuantity(quantity);
-            System.out.println("made to spot where the delete will happen");
+            System.out.println("made to spot where the EDIT will happen");
+
+
         }
 
         return new RedirectView("/mycart");
+    }
+
+    @GetMapping("/mycart/findOne")
+    @ResponseBody
+    public LineItem findOne(Long id) {
+        return lineItemRepository.getOne(id);
+
     }
 }
