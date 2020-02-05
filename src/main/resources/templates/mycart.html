@@ -54,6 +54,7 @@
                 
                 <div>
                     <form action="/submit" method="POST">
+                        <input type="hidden" name="id" th:value="${order.order_id}">
                         <input type="submit">
                     </form>
                 </div>
