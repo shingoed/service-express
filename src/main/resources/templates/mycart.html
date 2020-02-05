@@ -26,7 +26,7 @@
                 </thead>
 
                 <tbody>
-                    <tr th:each="product : ${data}">
+                    <tr th:each="product : ${data.getProduct()}">
                         <td th:text="${product.itemCode}"></td>
                         <td th:text="${product.itemName}"></td>
                         <td th:text="${product.width}"></td>
@@ -34,9 +34,8 @@
                         <td th:text="${product.color}"></td>
                         <td th:text="${product.style}"></td>
                         <td th:text="${product.type}"></td>
-                        <td  th:each="quan : ${itemQuantity}">
-                            <th:block th:text="${quan.quantity}"></th:block>
-                        </td>
+<!--                        <td  th:each="quan : ${itemQuantity}" th:text="${quan.quantity}">-->
+<!--                        </td>-->
                         <td><a th:href="@{/findOne/(id=${product.id})}" class="btn btn-primary eBtn">Edit Quantity</a>
                             <a th:href="@{/delete/(id=${product.id})}" class="btn btn-danger delBtn">Delete</a></td>
 

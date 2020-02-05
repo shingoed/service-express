@@ -64,8 +64,8 @@ public class OrderController {
                         System.out.println("ITEM QUANTITY" + item.getQuantity());
 
                     }
-                    model.addAttribute("itemQuantity", lineItems);
-                    model.addAttribute("data", cartProducts);
+                    model.addAttribute("data", lineItems);
+                    System.out.println(lineItems.get(2).getProduct());
 
                 }
             }
