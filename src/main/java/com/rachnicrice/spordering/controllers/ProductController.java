@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -51,37 +52,108 @@ public class ProductController {
         return "products";
     }
 
-    @PostMapping("/mycart")
-    public RedirectView addCart(Model model, Principal p, int quantity, Product product) {
-        System.out.println(quantity);
-        System.out.println("PRODUCT ID"+ productRepository);
+//    @PostMapping("/mycart")
+//    public RedirectView addCart(Model model, Principal p, String quantity, Product product) {
+////        System.out.println(quantity);
+//
+//        int i = Integer.parseInt(quantity);
+//        Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+//
+//        // Test if the user has an order object in the DB
+//        if (applicationUserRepository.findByUsername(p.getName()).getOrders() != null) {
+//            List<Order> userOrder = applicationUserRepository.findByUsername(p.getName()).getOrders();
+//
+//            if(!userOrder.get(0).getSubmitted()){ // Check to see if userOrder have existing order and isSubmitted is false
+//                LineItem cartItem = new LineItem(userOrder.get(0), productRepository.getOne((long) 1), i);// create new cart item with order, product, and quantity
+//                lineItemRepository.save(cartItem);
+//            } else { // If all orders are already submitted
+//
+//            }
+//        } else {
+//            //If no orders exist, make one
+//            Order order = new Order(applicationUserRepository.findByUsername(p.getName()), createdAt,false);
+//            orderRepository.save(order);
+//            LineItem cartItem = new LineItem(order, productRepository.getOne((long) 1), i);// create new cart item with order, product, and quantity
+//            lineItemRepository.save(cartItem);
+//        }
+//
+//        return new RedirectView("/mycart");
+//    }
 
+    @PostMapping("/mycart")
+//    public RedirectView addCart(Model model, Principal p, int quantity, Product product) {
+//        System.out.println(quantity);
+//        System.out.println("PRODUCT ID"+ productRepository);
+//
+//
+//        Timestamp createdAt = new Timestamp(System.currentTimeMillis());
+//        List<Order> userOrders = applicationUserRepository.findByUsername(p.getName()).getOrders();
+//
+//        // Test if the user has an order object in the DB
+//        if (!userOrders.isEmpty()) { // if user ever made an  order.
+////            boolean areAllOrdersSubmitted = true;
+//            for (Order order : userOrders) {
+//                if(order.getSubmitted() == false) {
+//                    System.out.println("made it into at least one order false");
+//                    LineItem cartItem = new LineItem(order, productRepository.getOne((long) 1), quantity);// create new cart item with order, product, and quantity
+//                    lineItemRepository.save(cartItem);
+////                    areAllOrdersSubmitted = false;
+//                }
+//            }
+//            // remember to go back here and implement the case where order submitted = true;
+//
+//
+//        } else {
+//            //If no orders exist, make one
+//            System.out.println("made it into no orders ever");
+//            Order order = new Order(applicationUserRepository.findByUsername(p.getName()), createdAt,false);
+//            orderRepository.save(order);
+//
+//            LineItem cartItem = new LineItem(order, productRepository.getOne((long) 1), quantity);// create new cart item with order, product, and quantity
+    public RedirectView addCart(Model model, Principal p, Product product) {
+
+        if (p != null) {
+            System.out.println(p.getName()+" is logged in!");
+            model.addAttribute("username", p.getName());
+        } else {
+            System.out.println("nobody is logged in");
+        }
 
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-        List<Order> userOrders = applicationUserRepository.findByUsername(p.getName()).getOrders();
+//        int i = Integer.parseInt(quantity);
 
-        // Test if the user has an order object in the DB
-        if (!userOrders.isEmpty()) { // if user ever made an  order.
-//            boolean areAllOrdersSubmitted = true;
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+
+        List<Order> userOrders = loggedInUser.getOrders();
+
+        boolean startedAtLeastOneOrder = userOrders!=null;
+
+        // Initialize as as true (case that does not have any unsubmitted orders), set to false if one is found in the loop
+        boolean onlySubmittedOrders = true;
+        if (userOrders!=null) {
             for (Order order : userOrders) {
-                if(order.getSubmitted() == false) {
-                    System.out.println("made it into at least one order false");
-                    LineItem cartItem = new LineItem(order, productRepository.getOne((long) 1), quantity);// create new cart item with order, product, and quantity
-                    lineItemRepository.save(cartItem);
-//                    areAllOrdersSubmitted = false;
+                if (order.getSubmitted()==false) {
+                    onlySubmittedOrders = false;
                 }
             }
-            // remember to go back here and implement the case where order submitted = true;
+        }
 
-
-        } else {
-            //If no orders exist, make one
-            System.out.println("made it into no orders ever");
-            Order order = new Order(applicationUserRepository.findByUsername(p.getName()), createdAt,false);
+        if (!startedAtLeastOneOrder || onlySubmittedOrders) {
+            Order order = new Order(loggedInUser, createdAt,false);
             orderRepository.save(order);
-
-            LineItem cartItem = new LineItem(order, productRepository.getOne((long) 1), quantity);// create new cart item with order, product, and quantity
+            //change hard coded 1 and 10 to path variables
+            LineItem cartItem = new LineItem(order, productRepository.getOne((long) 3), 10);// create new cart item with order, product, and quantity
             lineItemRepository.save(cartItem);
+        } else {
+            for (Order order : userOrders) {
+                if (order.getSubmitted()==false) {
+                    Order unsubmittedOrder = order;
+                    //change hard coded 1 and 10 to path variables
+                    LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne((long) 1), 66);// create new cart item with order, product, and quantity
+                    lineItemRepository.save(cartItem);
+                }
+            }
+
         }
 
         return new RedirectView("/mycart");
