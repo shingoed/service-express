@@ -14,5 +14,6 @@ public class EmailController {
     public RedirectView sendOrder (Principal p, Model m) {
 
         return new RedirectView("/mycart?submitted=true");
+
     }
 }
