@@ -293,6 +293,43 @@ padding:10px;
 .readable{
 
 font-size: 10px;
+
+
+/************************************ burger menu*****************************/
+
+#burgerMenuContainer {
+  display: inline-block;
+  margin: 6px;
+}
+#bar1, #bar2, #bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #4285F4;
+  /* background-color: #1abc9c; */
+  margin: 6px 0;
+  transition: 0.4s;
+}
+/* burger menu - on-click transition to X */
+.changeMenu #bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+.changeMenu #bar2 {opacity: 0;}
+.changeMenu #bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+/* toggle menu display on-burger-menu-click */
+#menuContainer {
+  display: none; /* starts with display: none;, toggle triggered in burgerToX function */
 }
 
-*************************
+/* ********hbootstrap hamburger menu********* */
+.navbar-toggler{
+  width: 35px;
+  height: 5px;
+  background-color: #4285F4;
+  /* background-color: #1abc9c; */
+  margin: 6px 0;
+  transition: 0.4s;
+}
