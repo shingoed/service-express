@@ -15,6 +15,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 public class ProductController {
@@ -43,50 +46,61 @@ public class ProductController {
             System.out.println("nobody is logged in");
         }
 
-        model.addAttribute("data", productRepository.findAll());
 
+        model.addAttribute("data", productRepository.findAll());
+//        System.out.println("FIND PRODUCT ID"+productRepository.);
         model.addAttribute("currentPage",page);
         return "products";
     }
 
-    @GetMapping("/mycart")
-    public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
-//        PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+    @PostMapping("/mycart")
+    public RedirectView addCart(Model model, Principal p, Long item_id, int quantity) {
+        System.out.println(item_id);
+        System.out.println(quantity);
 
-        if(p != null) {
+        if (p != null) {
             System.out.println(p.getName()+" is logged in!");
             model.addAttribute("username", p.getName());
         } else {
             System.out.println("nobody is logged in");
         }
 
-        model.addAttribute("data", productRepository.findAll());
-
-        model.addAttribute("currentPage",page);
-
-//        Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-//        Order order = new Order(applicationUserRepository.findByUsername(p.getName()),createdAt,false);
-//        orderRepository.save(order);
-//        System.out.println(applicationUserRepository.findByUsername(p.getName()).getOrders().toString()); // return []
-        return "mycart";
-    }
-
-    @PostMapping("/mycart")
-    public RedirectView addCart(Model model, Principal p) {
-
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 
-//        if(applicationUserRepository.findByUsername(p.getName()).getOrders().isEmpty()){ // grab user's order if its empty create a new order.
-//            Order order = new Order(applicationUserRepository.findByUsername(p.getName()),createdAt,false);
-//
-//        }else {
-//            if(applicationUserRepository.findByUsername(p.getName()).getOrders().){
-//
-//            }else {
-//
-//            }
-//        }
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
 
+        List<Order> userOrders = loggedInUser.getOrders();
+
+        boolean startedAtLeastOneOrder = userOrders!=null;
+
+
+        // Initialize as as true (case that does not have any unsubmitted orders), set to false if one is found in the loop
+        boolean onlySubmittedOrders = true;
+        if (userOrders!=null) {
+            for (Order order : userOrders) {
+                if (order.getSubmitted()==false) {
+                    onlySubmittedOrders = false;
+                }
+            }
+        }
+
+        if (!startedAtLeastOneOrder || onlySubmittedOrders) {
+            Order order = new Order(loggedInUser, createdAt,false);
+            orderRepository.save(order);
+            //change hard coded 1 and 10 to path variables
+            LineItem cartItem = new LineItem(order, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
+            lineItemRepository.save(cartItem);
+        } else {
+            for (Order order : userOrders) {
+                if (order.getSubmitted()==false) {
+                    Order unsubmittedOrder = order;
+                    //change hard coded 1 and 10 to path variables
+                    LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
+                    lineItemRepository.save(cartItem);
+                }
+            }
+
+        }
 
         return new RedirectView("/mycart");
     }
@@ -113,17 +127,37 @@ public class ProductController {
 
     }
 
-    @GetMapping("/profile")
-
-    public String getProfile(Model model, Principal p){
-        if(p != null) {
-            System.out.println(p.getName()+" is logged in!");
-            model.addAttribute("username", p.getName());
+    @GetMapping("/populateDatabase")
+    public RedirectView populateDatabase(Principal p) {
+        if (p != null) {
+            System.out.println(p.getName() + " is logged in!");
         } else {
             System.out.println("nobody is logged in");
         }
-        return "profile";
+
+        // Make a list of products already in the database
+        List<Product> dbProductList = productRepository.findAll();
+
+        HashSet<String> dbItemCodeSet = new HashSet<>();
+        for (Product product : dbProductList) {
+            dbItemCodeSet.add(product.getItemCode());
+        }
+
+        // make a set of products to add
+        HashSet<Product> productsToAdd = new HashSet<>();
+        productsToAdd.add(new Product("DS2310BLK-LF", "Downspout", "2x3", "10'", "Black", "style", "downspout", 10));
+        productsToAdd.add(new Product("DS2310WMUS-LF", "Downspout", "2x3", "10'", "Musket Brown", "style", "downspout", 10));
+        productsToAdd.add(new Product("DS2310LGWHT-LF", "Downspout", "2x3", "10'", "Low-Gloss White", "style", "downspout", 10));
+        productsToAdd.add(new Product("DS2310WHT-LF", "Downspout", "2x3", "10'", "High Gloss White", "style", "downspout", 10));
+        productsToAdd.add(new Product("DS3410LGWHT-LF", "Downspout", "3x4", "10'", "Low-Gloss White", "style", "downspout", 10));
+
+        // for each product in the set, add it to the database only if there isn't already a product with that item code in the database
+        for (Product product : productsToAdd) {
+            if (!dbItemCodeSet.contains(product.getItemCode())) {
+                productRepository.save(product);
+            }
+        }
+
+        return new RedirectView("/");
     }
-
-
 }
