@@ -1,13 +1,12 @@
 package com.rachnicrice.spordering.utils;
 
 import com.rachnicrice.spordering.models.LineItem;
+import com.rachnicrice.spordering.models.Order;
 import com.rachnicrice.spordering.models.OrderRepository;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ByteArrayResource;
 
 import java.io.FileOutputStream;
@@ -23,6 +22,9 @@ public class ExcelConverter {
 
     public static ByteArrayResource export(String filename, Long id, OrderRepository repo) throws IOException {
         byte[] bytes = new byte[1024];
+        Order order = repo.getOne(id);
+        order.setSubmitted(true);
+        repo.save(order);
         try (Workbook workbook = (Workbook) generateExcel(id, repo)) {
             FileOutputStream fos = write(workbook, filename);
             fos.write(bytes);

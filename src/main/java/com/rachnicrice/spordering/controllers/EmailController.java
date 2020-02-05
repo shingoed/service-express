@@ -1,5 +1,6 @@
 package com.rachnicrice.spordering.controllers;
 
+import com.rachnicrice.spordering.models.ApplicationUserRepository;
 import com.rachnicrice.spordering.models.OrderRepository;
 import com.rachnicrice.spordering.utils.ExcelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class EmailController {
     JavaMailSender jSender;
 
     @Autowired
+    ApplicationUserRepository userRepo;
+
+    @Autowired
     OrderRepository repo;
 
     @PostMapping("/submit")
@@ -34,15 +38,17 @@ public class EmailController {
         //Create a new message
         MimeMessage message = jSender.createMimeMessage();
 
+        String customerID = repo.getOne(id).getUser().getSpCustomer_number();
+
         MimeMessageHelper helper = null;
         try {
             helper = new MimeMessageHelper(message, true);
             //Set who the email will be sent to
             helper.setTo("Rachnicrice@gmail.com");
             //Set the subject of the email
-            helper.setSubject("test");
+            helper.setSubject("Customer: " + customerID);
             //Set the email body
-            helper.setText("You got more mail!!");
+            helper.setText("New online order from " + customerID);
 
             //Create teh excel from the order data
             try {

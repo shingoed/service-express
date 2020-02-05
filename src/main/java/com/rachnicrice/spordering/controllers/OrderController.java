@@ -59,7 +59,6 @@ public class OrderController {
                     }
                     model.addAttribute("dataList", lineItems);
                     model.addAttribute("order", unsubmittedOrder);
-
                 }
             }
         } else {
