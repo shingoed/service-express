@@ -26,8 +26,6 @@ $(document).ready(function() {
             $('.myForm #exampleModal').modal();
         }else if(text=='Edit Quantity'){
         // only show the form with the correct #
-
-//            $('.myForm'+hrefID+' #quantity').val('')
             $('.myForm'+hrefID+' #exampleModal').modal();
         }
     });
@@ -35,6 +33,8 @@ $(document).ready(function() {
     $('.table .delBtn').on('click',function(event){
         event.preventDefault();
         var href = $(this).attr('href');
+        var hrefID = href.substr(href.lastIndexOf('/') + 1);
+        $('#deleteFormClient').attr('action', '/mycart/delete/'+ hrefID );
         $('#deleteModal #delReference').attr('href', href);
         $('#deleteModal').modal();
 

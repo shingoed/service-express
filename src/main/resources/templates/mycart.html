@@ -41,13 +41,8 @@
                         <td th:text="${data.quantity}"></td>
 
                         <td>
-<!--                            <form th:action="${'/mycart/edit/' + data.id}" method="POST">-->
-<!--                                <input type="number"  name="quantity" th:value="${data.quantity}"/>-->
-<!--                                <input type="submit" value="save">-->
-<!--                            </form>-->
-
                             <button th:href="@{/mycart/edit/{id}(id=${data.id})}" class="btn btn-primary eBtn" >Edit Quantity</button>
-<!--                            <a th:href="@{/mycart/delete/(id=${data.id})}" class="btn btn-danger delBtn">Delete</a></td>-->
+                            <button th:href="@{/mycart/delete/{id}(id=${data.id})}" class="btn btn-danger delBtn">Delete</button></td>
                         </td>
                     </tr>
                 </tbody>
@@ -105,24 +100,30 @@
         </form>
     </div>
 
-    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p class="alert alert-danger">Are you sure you want to delete this item off your cart?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a href="" class="btn btn-danger" id="delReference">Delete</a>
+
+    <div th:class="'delform'+${data.id}" th:each="data : ${dataList}">
+        <form method="POST" id="deleteFormClient">
+            <input type="hidden" name="_method" value="DELETE">
+            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="alert alert-danger">Are you sure you want to delete this item off your cart?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-danger" id="delReference">Delete</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </div>
 
 </div>
