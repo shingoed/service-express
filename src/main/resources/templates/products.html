@@ -35,8 +35,7 @@
                         <td>
                             <form action="/mycart" method="POST">
                                 <input type="number" id="quantity" name="quantity">
-<!--                                <input type="hidden" name="product" id="product">-->
-                                <input type="hidden" th:id="${product}" th:name="${product}" val="2">
+                                <input type="hidden" id="item_id" name="item_id" th:value="${product.item_id}">
                                 <input type="submit" class="btn btn-primary" value="Add to Cart!">
                             </form>
                         </td>
