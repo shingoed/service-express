@@ -61,6 +61,10 @@ public class Order {
         return user;
     }
 
+    public void setSubmitted(boolean submitted) {
+        isSubmitted = submitted;
+    }
+
     public List<LineItem> getItemsInThisOrder() {
         return lineItemsInThisOrder;
     }
