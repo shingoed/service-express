@@ -21,22 +21,30 @@
                     <th>Color</th>
                     <th>Style</th>
                     <th>Type</th>
+                    <th>Quantity</th>
                 </tr>
                 </thead>
 
-                <tbody>
-                <tr th:each="product : ${data}">
-                    <td th:text="${product.itemCode}"></td>
-                    <td th:text="${product.itemName}"></td>
-                    <td th:text="${product.width}"></td>
-                    <td th:text="${product.length}"></td>
-                    <td th:text="${product.color}"></td>
-                    <td th:text="${product.style}"></td>
-                    <td th:text="${product.type}"></td>
-                    <td><a th:href="@{/findOne/(id=${product.id})}" class="btn btn-primary eBtn">Edit Quantity</a>
-                        <a th:href="@{/delete/(id=${product.id})}" class="btn btn-danger delBtn">Delete</a></td>
+                <div th:if="${param.submitted}" class="wrapper fadeInDown">
+                    <p>Your order has been successfully submitted! Thank you for your business</p>
+                </div>
 
-                </tr>
+                <tbody>
+                    <tr th:each="product : ${data}">
+                        <td th:text="${product.itemCode}"></td>
+                        <td th:text="${product.itemName}"></td>
+                        <td th:text="${product.width}"></td>
+                        <td th:text="${product.length}"></td>
+                        <td th:text="${product.color}"></td>
+                        <td th:text="${product.style}"></td>
+                        <td th:text="${product.type}"></td>
+                        <td  th:each="quan : ${itemQuantity}">
+                            <th:block th:text="${quan.quantity}"></th:block>
+                        </td>
+                        <td><a th:href="@{/findOne/(id=${product.id})}" class="btn btn-primary eBtn">Edit Quantity</a>
+                            <a th:href="@{/delete/(id=${product.id})}" class="btn btn-danger delBtn">Delete</a></td>
+
+                    </tr>
                 </tbody>
 
             </table>

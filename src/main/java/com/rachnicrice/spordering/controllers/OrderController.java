@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import org.thymeleaf.context.LazyContextVariable;
+
 import java.sql.Timestamp;
 
 import java.security.Principal;
@@ -31,6 +33,11 @@ public class OrderController {
     @GetMapping("/mycart")
     public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
 //      PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+//        lineItemRepository.getOne((long)1).setQuantity(30);
+//        System.out.println("CART QUANTITY"+lineItemRepository.getOne((long)1).getQuantity());
+//        System.out.println("Order "+orderRepository.getOne((long)1).toString());
+
+
 
         if (p != null) {
             System.out.println(p.getName()+" is logged in!");
@@ -54,8 +61,12 @@ public class OrderController {
                     for (LineItem item : lineItems) {
                         Product cartProduct = item.getProduct();
                         cartProducts.add(cartProduct);
+                        System.out.println("ITEM QUANTITY" + item.getQuantity());
+
                     }
+                    model.addAttribute("itemQuantity", lineItems);
                     model.addAttribute("data", cartProducts);
+
                 }
             }
         }
