@@ -15,6 +15,7 @@ public class ApplicationUser implements UserDetails {
     Long user_id;
 
     String username;
+    String spCustomer_id;
     String password;
     String email;
     String phone;
@@ -40,14 +41,22 @@ public class ApplicationUser implements UserDetails {
         this.email = email;
     }
 
+    public ApplicationUser(String username, String password, String email, String spCustomer_id) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.spCustomer_id = spCustomer_id;
+    }
 
-    public ApplicationUser(String username, String password, String email, String phone, String firstName, String lastName) {
+
+    public ApplicationUser(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_id) {
         this.username = username;
         this.password = password;
         this.email = email;
         this.phone = phone;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.spCustomer_id = spCustomer_id;
     }
 
 

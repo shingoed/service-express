@@ -51,14 +51,14 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public RedirectView signup(String username, String password, String email, String phone, String firstName, String lastName) {
+    public RedirectView signup(String username, String spCustomer_id, String password, String email, String phone, String firstName, String lastName) {
         if (applicationUserRepository.findByUsername(username) == null) {
             System.out.println(username);
             System.out.println(password);
             System.out.println(email);
             System.out.println(lastName);
             System.out.println(firstName);
-            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName);
+            ApplicationUser newUser = new ApplicationUser(username, spCustomer_id, encoder.encode(password),email,phone,firstName,lastName);
             applicationUserRepository.save(newUser);
             System.out.println(newUser.toString());
 //            auto-login when people sign up
@@ -100,7 +100,7 @@ public class HomeController {
             List<ApplicationUser> user  = (List<ApplicationUser>) applicationUserRepository.findByUsername(p.getName());
             model.addAttribute("username", p.getName());
 
-            model.addAttribute("firstName",.getName());
+            model.addAttribute("firstName", p.getName());
 
             model.addAttribute("lastName",p.getName());
 
