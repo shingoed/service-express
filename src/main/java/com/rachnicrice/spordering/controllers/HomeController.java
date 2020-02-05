@@ -101,6 +101,8 @@ public class HomeController {
         if(p != null) {
             System.out.println(p.getName()+" is logged in!");
             model.addAttribute("user", applicationUserRepository.findByUsername(p.getName()));
+            model.addAttribute("username", p.getName());
+
 
         } else {
             System.out.println("nobody is logged in");
