@@ -99,7 +99,7 @@ public class OrderController {
         if (loggedInUser == userAssociatedWithLineItem) {
             lineItem.setQuantity(quantity);
             System.out.println("made to spot where the EDIT will happen");
-            
+
 
         }
 
