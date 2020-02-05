@@ -60,5 +60,4 @@ public class LineItem {
         return id;
     }
 
-
 }

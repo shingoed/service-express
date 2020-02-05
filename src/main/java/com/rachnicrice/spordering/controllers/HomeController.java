@@ -2,6 +2,7 @@ package com.rachnicrice.spordering.controllers;
 
 import com.rachnicrice.spordering.models.ApplicationUser;
 import com.rachnicrice.spordering.models.ApplicationUserRepository;
+import com.rachnicrice.spordering.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -108,7 +110,6 @@ public class HomeController {
         }
         return "profile";
     }
-
 
 }
 

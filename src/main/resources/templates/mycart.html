@@ -14,7 +14,7 @@
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>ItemCode ??</th>
+                    <th>ItemCode</th>
                     <th>Name</th>
                     <th>Width</th>
                     <th>Length</th>
@@ -30,20 +30,25 @@
                 </div>
 
                 <tbody>
-                    <tr th:each="product : ${data}">
-                        <td th:text="${product.itemCode}"></td>
-                        <td th:text="${product.itemName}"></td>
-                        <td th:text="${product.width}"></td>
-                        <td th:text="${product.length}"></td>
-                        <td th:text="${product.color}"></td>
-                        <td th:text="${product.style}"></td>
-                        <td th:text="${product.type}"></td>
-                        <td  th:each="quan : ${itemQuantity}">
-                            <th:block th:text="${quan.quantity}"></th:block>
-                        </td>
-                        <td><a th:href="@{/findOne/(id=${product.id})}" class="btn btn-primary eBtn">Edit Quantity</a>
-                            <a th:href="@{/delete/(id=${product.id})}" class="btn btn-danger delBtn">Delete</a></td>
+                    <tr th:each="data : ${dataList}">
+                        <td th:text="${data.product.itemCode}"></td>
+                        <td th:text="${data.product.itemName}"></td>
+                        <td th:text="${data.product.width}"></td>
+                        <td th:text="${data.product.length}"></td>
+                        <td th:text="${data.product.color}"></td>
+                        <td th:text="${data.product.style}"></td>
+                        <td th:text="${data.product.type}"></td>
+                        <td th:text="${data.quantity}"></td>
 
+                        <td>
+<!--                            <form th:action="${'/mycart/edit/' + data.id}" method="POST">-->
+<!--                                <input type="number"  name="quantity" th:value="${data.quantity}"/>-->
+<!--                                <input type="submit" value="save">-->
+<!--                            </form>-->
+
+                            <button th:href="@{/mycart/edit/{id}(id=${data.id})}" class="btn btn-primary eBtn" >Edit Quantity</button>
+<!--                            <a th:href="@{/mycart/delete/(id=${data.id})}" class="btn btn-danger delBtn">Delete</a></td>-->
+                        </td>
                     </tr>
                 </tbody>
                 
@@ -68,8 +73,8 @@
 
     </div>
     <!-- Got this form from bootstrap 4-->
-    <div class="myForm">
-        <form th:action="@{/save}" method="POST">
+    <div th:class="'myForm'+${data.id}" th:each="data : ${dataList}">
+        <form th:action="@{/mycart/edit/{id}(id=${data.id})}" method="POST">
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -84,29 +89,8 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <input type="hidden" class="form-control" id="itemCode" name="itemCode" value=" "/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="itemName" name="itemName" value=" "/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="length" name="length" value=" "/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="width" name="width" value=" "/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="color" name="color" value=" "/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="style" name="style" value=" "/>
-                            </div>
-                            <div class="form-group">
-                                <input type="hidden" class="form-control" id="type" name="type" value=" "/>
-                            </div>
-                            <div class="form-group">
                                 <label for="quantity" class="col-form-label">Quantity:</label>
-                                <input type="number" class="form-control" id="quantity" name="quantity" value=" "/>
+                                <input type="number" class="form-control" id="quantity" name="quantity" th:value="${data.quantity}"/>
                             </div>
 
 
