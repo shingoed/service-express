@@ -4,11 +4,10 @@ import com.rachnicrice.spordering.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+import org.thymeleaf.context.LazyContextVariable;
+
 import java.sql.Timestamp;
 
 import java.security.Principal;
@@ -34,6 +33,11 @@ public class OrderController {
     @GetMapping("/mycart")
     public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
 //      PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+//        lineItemRepository.getOne((long)1).setQuantity(30);
+//        System.out.println("CART QUANTITY"+lineItemRepository.getOne((long)1).getQuantity());
+//        System.out.println("Order "+orderRepository.getOne((long)1).toString());
+
+
 
         if (p != null) {
             System.out.println(p.getName()+" is logged in!");
@@ -46,16 +50,24 @@ public class OrderController {
 
         List<Order> userOrders = loggedInUser.getOrders();
 
-        for (Order order : userOrders) {
-            if (order.getSubmitted()==false) {
-                Order unsubmittedOrder = order;
-                List<LineItem> lineItems = unsubmittedOrder.getItemsInThisOrder();
-                List<Product> cartProducts = new LinkedList<>();
-                for (LineItem item : lineItems) {
-                    Product cartProduct = item.getProduct();
-                    cartProducts.add(cartProduct);
+        System.out.println("are user orders null? " + userOrders==null);
+
+        if (userOrders!=null) {
+            for (Order order : userOrders) {
+                if (order.getSubmitted()==false) {
+                    Order unsubmittedOrder = order;
+                    List<LineItem> lineItems = unsubmittedOrder.getItemsInThisOrder();
+                    List<Product> cartProducts = new LinkedList<>();
+                    for (LineItem item : lineItems) {
+                        Product cartProduct = item.getProduct();
+                        cartProducts.add(cartProduct);
+                        System.out.println("ITEM QUANTITY" + item.getQuantity());
+
+                    }
+                    model.addAttribute("itemQuantity", lineItems);
+                    model.addAttribute("data", cartProducts);
+
                 }
-                model.addAttribute("data", cartProducts);
             }
         }
 
@@ -64,16 +76,36 @@ public class OrderController {
         return "mycart";
     }
 
-    @DeleteMapping("/mycart/{id}")
-    public RedirectView deletePost(@PathVariable long id, Principal p) {
+    // update to match route in form
+    @DeleteMapping("/mycart/delete/{id}")
+    public RedirectView deleteLineItem(@PathVariable long id, Principal p) {
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
         LineItem lineItem = lineItemRepository.getOne(id);
 
-//        if (loggedInUser.)
-//        if (loggedInUser.get().contains(post)) {
-//            postRepository.deleteById(id);
-//        }
+        ApplicationUser userAssociatedWithLineItem = lineItem.getOrder().getUser();
 
-        return new RedirectView("/");
+        if (loggedInUser == userAssociatedWithLineItem) {
+//            lineItemRepository.getOne(id);
+            System.out.println("made to spot where the delete will happen");
+        }
+
+        return new RedirectView("/mycart");
+    }
+
+    // update to match route in form
+    @PostMapping("/mycart/edit/{id}")
+    public RedirectView updateQuantity(@PathVariable long id, Principal p, int quantity) {
+
+        ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
+        LineItem lineItem = lineItemRepository.getOne(id);
+
+        ApplicationUser userAssociatedWithLineItem = lineItem.getOrder().getUser();
+
+        if (loggedInUser == userAssociatedWithLineItem) {
+            lineItem.setQuantity(quantity);
+            System.out.println("made to spot where the delete will happen");
+        }
+
+        return new RedirectView("/mycart");
     }
 }
