@@ -97,14 +97,9 @@ public class HomeController {
     public String getProfile(Model model, Principal p){
         if(p != null) {
             System.out.println(p.getName()+" is logged in!");
-            List<ApplicationUser> user  = (List<ApplicationUser>) applicationUserRepository.findByUsername(p.getName());
-            model.addAttribute("username", p.getName());
-
-            model.addAttribute("firstName", p.getName());
-
-            model.addAttribute("lastName",p.getName());
-
-            model.addAttribute("email",p.getName());
+            System.out.println("USER DATA"+applicationUserRepository.findByUsername(p.getName()).toString());
+//            List<ApplicationUser> user  = (List<ApplicationUser>) applicationUserRepository.findByUsername(p.getName());
+            model.addAttribute("user", applicationUserRepository.findByUsername(p.getName()));
 
         } else {
             System.out.println("nobody is logged in");
