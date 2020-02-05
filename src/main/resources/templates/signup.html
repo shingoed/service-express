@@ -15,12 +15,13 @@
             <p class="error" th:if="${param.taken}">Sorry, that username was already taken. Please try a new username.</p>
             <form action="/signup" method="POST" class="loginForm"><br>
                 <label>Username <input type="text" class="fadeIn second" name="username" placeholder="username"> </label>
-                <label>Service Partners Customer ID <input type="text" class="fadeIn second" name="spCustomer_number" placeholder="Service Partners Customer ID"> </label>
+                <label>Service Partners Customer ID <input required type="text" class="fadeIn second" name="spCustomer_number" placeholder="Service Partners Customer ID"> </label>
                 <label>Password <input type="password" class="fadeIn third" name="password" placeholder="password"> </label>
-                <label>Email <input type="text" class="fadeIn fourth" name="email" placeholder="username"> </label>
+                <label>Email <input type="text" class="fadeIn fourth" name="email" placeholder="example@example.com"> </label>
                 <label>Phone Number <input type="text" class="fadeIn fourth" name="phone" placeholder="253-333-3333"> </label>
                 <label>First Name <input type="text" class="fadeIn fourth" name="firstName" placeholder="First Name"> </label>
                 <label>Last Name <input type="text" class="fadeIn fourth" name="lastName" placeholder="Last Name"> </label>
+                <label>Business Name <input type="text" class="fadeIn fourth" name="businessName" placeholder="Business Name"> </label>
                 <input type="submit" class="fadeIn fourth" value="Sign Up">
             </form>
         </div>

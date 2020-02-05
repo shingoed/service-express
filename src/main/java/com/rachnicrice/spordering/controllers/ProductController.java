@@ -15,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -124,5 +125,39 @@ public class ProductController {
     public Product findOne(Long id) {
         return productRepository.getOne(id);
 
+    }
+
+    @GetMapping("/populateDatabase")
+    public RedirectView populateDatabase(Principal p) {
+        if (p != null) {
+            System.out.println(p.getName() + " is logged in!");
+        } else {
+            System.out.println("nobody is logged in");
+        }
+
+        // Make a list of products already in the database
+        List<Product> dbProductList = productRepository.findAll();
+
+        HashSet<String> dbItemCodeSet = new HashSet<>();
+        for (Product product : dbProductList) {
+            dbItemCodeSet.add(product.getItemCode());
+        }
+
+        // make a set of products to add
+        HashSet<Product> productsToAdd = new HashSet<>();
+        productsToAdd.add(new Product("DS2310BLK-LF", "Downspout", "2x3", "10'", "Black", "style", "downspout", 10));
+        productsToAdd.add(new Product("DS2310WMUS-LF", "Downspout", "2x3", "10'", "Musket Brown", "style", "downspout", 10));
+        productsToAdd.add(new Product("DS2310LGWHT-LF", "Downspout", "2x3", "10'", "Low-Gloss White", "style", "downspout", 10));
+        productsToAdd.add(new Product("DS2310WHT-LF", "Downspout", "2x3", "10'", "High Gloss White", "style", "downspout", 10));
+        productsToAdd.add(new Product("DS3410LGWHT-LF", "Downspout", "3x4", "10'", "Low-Gloss White", "style", "downspout", 10));
+
+        // for each product in the set, add it to the database only if there isn't already a product with that item code in the database
+        for (Product product : productsToAdd) {
+            if (!dbItemCodeSet.contains(product.getItemCode())) {
+                productRepository.save(product);
+            }
+        }
+
+        return new RedirectView("/");
     }
 }

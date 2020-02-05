@@ -2,6 +2,7 @@ package com.rachnicrice.spordering.controllers;
 
 import com.rachnicrice.spordering.models.ApplicationUser;
 import com.rachnicrice.spordering.models.ApplicationUserRepository;
+import com.rachnicrice.spordering.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -51,7 +53,7 @@ public class HomeController {
     }
 
     @PostMapping("/signup")
-    public RedirectView signup(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_number) {
+    public RedirectView signup(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_number, String businessName) {
         if (applicationUserRepository.findByUsername(username) == null) {
             System.out.println("username: " + username);
             System.out.println("password: " + password);
@@ -59,7 +61,7 @@ public class HomeController {
             System.out.println("lastName: " + lastName);
             System.out.println("firstName: " + firstName);
             System.out.println("spCustomer_number: " + spCustomer_number);
-            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName, spCustomer_number);
+            ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName, spCustomer_number, businessName);
             applicationUserRepository.save(newUser);
             System.out.println(newUser.toString());
 //            auto-login when people sign up
@@ -98,17 +100,15 @@ public class HomeController {
     public String getProfile(Model model, Principal p){
         if(p != null) {
             System.out.println(p.getName()+" is logged in!");
-
-//            System.out.println("USER DATA"+applicationUserRepository.findByUsername(p.getName()).toString());
-//            List<ApplicationUser> user  = (List<ApplicationUser>) applicationUserRepository.findByUsername(p.getName());
             model.addAttribute("user", applicationUserRepository.findByUsername(p.getName()));
+            model.addAttribute("username", p.getName());
+
 
         } else {
             System.out.println("nobody is logged in");
         }
         return "profile";
     }
-
 
 }
 

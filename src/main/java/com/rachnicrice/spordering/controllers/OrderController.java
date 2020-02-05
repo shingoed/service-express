@@ -11,6 +11,7 @@ import org.thymeleaf.context.LazyContextVariable;
 import java.sql.Timestamp;
 
 import java.security.Principal;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,11 +43,11 @@ public class OrderController {
 
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
 
-        List<Order> userOrders = loggedInUser.getOrders();
+        System.out.println("are user orders null? " + loggedInUser.getOrders());
 
-        System.out.println("are user orders null? " + userOrders==null);
 
-        if (userOrders!=null) {
+        if (loggedInUser.getOrders().size() > 0) {
+            List<Order> userOrders = loggedInUser.getOrders();
             for (Order order : userOrders) {
                 if (order.getSubmitted()==false) {
                     Order unsubmittedOrder = order;
@@ -57,11 +58,14 @@ public class OrderController {
                         cartProducts.add(cartProduct);
                     }
                     model.addAttribute("dataList", lineItems);
-
+                    model.addAttribute("order", unsubmittedOrder);
                 }
             }
+        } else {
+            Order newOrder = new Order(applicationUserRepository.findByUsername(p.getName()), new Date(), false);
+            orderRepository.save(newOrder);
+            model.addAttribute("order", newOrder);
         }
-
         model.addAttribute("currentPage",page);
 
         return "mycart";

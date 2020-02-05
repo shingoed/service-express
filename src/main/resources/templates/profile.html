@@ -8,7 +8,6 @@
 <body>
 <nav th:replace="fragments/common :: navbar"></nav>
 
-
 <div class="container">
     <div class="row">
         <div class="col-lg-10 col-xl-9 mx-auto">
@@ -21,6 +20,12 @@
 
                         <div class="form-label-group">
                             <h4>Username: [[${user.username}]]</h4>
+                        </div>
+
+                        <hr>
+
+                        <div class="form-label-group">
+                            <h4>Business Name: [[${user.businessName}]]</h4>
                         </div>
 
                         <hr>
