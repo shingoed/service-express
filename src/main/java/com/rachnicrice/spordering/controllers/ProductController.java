@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.security.Principal;
 import java.sql.Timestamp;
@@ -34,6 +35,8 @@ public class ProductController {
     @Autowired
     LineItemRepository lineItemRepository;
 
+    @Autowired
+    PasswordEncoder encoder;
 
     @GetMapping("/products")
     public String showPage(Principal p, Model model) {
@@ -165,10 +168,17 @@ public class ProductController {
 
         // Make a list of products already in the database
         List<Product> dbProductList = productRepository.findAll();
+        List<ApplicationUser> dbAdminList = applicationUserRepository.findAll();
 
         HashSet<String> dbItemCodeSet = new HashSet<>();
         for (Product product : dbProductList) {
             dbItemCodeSet.add(product.getItemCode());
+        }
+
+        // Make a list of admin accounts already in the database
+        HashSet<String> dbAdminIdSet = new HashSet<>();
+        for (ApplicationUser adminUser : dbAdminList) {
+            dbAdminIdSet.add(adminUser.getUsername());
         }
 
         // make a set of products to add
@@ -179,10 +189,21 @@ public class ProductController {
         productsToAdd.add(new Product("DS2310WHT-LF", "Downspout", "2x3", "10'", "High Gloss White", "style", "downspout", 10));
         productsToAdd.add(new Product("DS3410LGWHT-LF", "Downspout", "3x4", "10'", "Low-Gloss White", "style", "downspout", 10));
 
+        // make a set of new admins to add
+        HashSet<ApplicationUser> adminsToAdd = new HashSet<>();
+        adminsToAdd.add(new ApplicationUser("spadmin", encoder.encode("servicepartnersadmin"), true));
+
         // for each product in the set, add it to the database only if there isn't already a product with that item code in the database
         for (Product product : productsToAdd) {
             if (!dbItemCodeSet.contains(product.getItemCode())) {
                 productRepository.save(product);
+            }
+        }
+
+        // for each admin in the set, add it to the database only if there isn't already an admin with that username in the database
+        for (ApplicationUser adminUser : adminsToAdd) {
+            if (!dbAdminIdSet.contains(adminUser.getUsername())) {
+                applicationUserRepository.save(adminUser);
             }
         }
 
