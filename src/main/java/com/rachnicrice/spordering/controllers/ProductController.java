@@ -120,7 +120,7 @@ public class ProductController {
 
         }
 
-        return new RedirectView("/mycart");
+        return new RedirectView("/products");
     }
 
 

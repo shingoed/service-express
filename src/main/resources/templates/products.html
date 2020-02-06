@@ -11,6 +11,7 @@
         <button th:if="${isAuthorized == true}" class="btn btn-success nBtn">New Item</button>
         <div class="card">
             <div class="card-block">
+<!--                Displaying the table for products.-->
                 <table class="table table-hover">
                     <thead>
                     <tr>
@@ -25,6 +26,7 @@
                     </thead>
 
                     <tbody>
+<!--                    Iterate through data object which got passed in with addAttribute to display the products.-->
                     <tr th:each="product : ${data}">
                         <td th:text="${product.itemCode}"></td>
                         <td th:text="${product.itemName}"></td>
@@ -33,6 +35,7 @@
                         <td th:text="${product.color}"></td>
                         <td th:text="${product.style}"></td>
                         <td th:text="${product.type}"></td>
+<!--                        Show this table data for normal user.-->
                         <td th:unless="${isAuthorized == true}">
                             <form action="/mycart" method="POST">
                                 <input type="number" id="quantity" name="quantity" placeholder="Add Quantity">
@@ -40,6 +43,7 @@
                                 <input type="submit" class="btn btn-primary" value="Add to Cart!">
                             </form>
                         </td>
+<!--                        Show this table data only if the user are authorized/admin.-->
                         <td th:if="${isAuthorized == true}">
                             <a th:href="@{/delete/(id=${product.id})}" class="btn btn-danger delBtn">Delete</a>
                             <a th:href="@{/findOne/(id=${product.id})}" class="btn btn-primary eBtn">Edit</a>
@@ -51,6 +55,7 @@
 
         </div>
 
+<!--        Form modal to Edit / Add Products. This modal only popepd up when user is an admin.-->
         <div class="myForm">
             <form th:action="@{/save}" method="POST">
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -106,7 +111,7 @@
                 </div>
             </form>
         </div>
-
+<!--        Delete modal-->
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
