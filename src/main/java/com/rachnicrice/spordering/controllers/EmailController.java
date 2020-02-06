@@ -6,7 +6,6 @@ import com.rachnicrice.spordering.utils.ExcelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -69,6 +68,7 @@ public class EmailController {
 
         //Send your email
         jSender.send(message);
+        //Send the user back to the cart page with the submitted param (this param will cause a confirmation message to be shown via thymeleaf)
         return new RedirectView("/mycart?submitted=true");
     }
 
