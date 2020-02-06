@@ -11,6 +11,7 @@
 <div class="container">
     <div class="card">
         <div class="card-block">
+            <!--                Displaying the table for products.-->
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -30,6 +31,7 @@
                 </div>
 
                 <tbody>
+<!--                Iterate through dataList object to display product into mycart page.-->
                     <tr th:each="data : ${dataList}">
                         <td th:text="${data.product.itemCode}"></td>
                         <td th:text="${data.product.itemName}"></td>
@@ -58,6 +60,7 @@
 
     </div>
     <!-- Got this form from bootstrap 4-->
+<!--    Form modal to Edit quantity for cart items.-->
     <div th:class="'myForm'+${data.id}" th:each="data : ${dataList}">
         <form th:action="@{/mycart/edit/{id}(id=${data.id})}" method="POST">
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,6 +94,7 @@
     </div>
 
 
+<!--    Form modal delete cart items.-->
     <div th:class="'delform'+${data.id}" th:each="data : ${dataList}">
         <form method="POST" id="deleteFormClient">
             <input type="hidden" name="_method" value="DELETE">
