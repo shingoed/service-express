@@ -52,7 +52,7 @@ public class EmailController {
 
             //Create the excel from the order data
             try {
-                //this will create a new excel called order.xlsx
+                //this will create a new excel called order.xlsx by calling the export function
                 Resource responseFile = ExcelConverter.export("order.xlsx", id, repo);
             } catch (IOException e) {
                 e.printStackTrace();

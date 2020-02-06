@@ -39,7 +39,6 @@ public class ExcelConverter {
         return new ByteArrayResource(bytes);
     }
 
-    //Change from AutoCloseable to Workbook if this does not work
     //Had to change to AutoCloseable due to version changes from Apache 3.9 to 4.0
     public static AutoCloseable generateExcel(Long id, OrderRepository repo) {
         Workbook workbook = new XSSFWorkbook();
