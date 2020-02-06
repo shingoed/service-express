@@ -22,9 +22,13 @@ public class ExcelConverter {
 
     public static ByteArrayResource export(String filename, Long id, OrderRepository repo) throws IOException {
         byte[] bytes = new byte[1024];
+
+        //Change the order status from isSubmitted=false to isSubmitted=true
         Order order = repo.getOne(id);
         order.setSubmitted(true);
         repo.save(order);
+
+
         try (Workbook workbook = (Workbook) generateExcel(id, repo)) {
             FileOutputStream fos = write(workbook, filename);
             fos.write(bytes);
@@ -47,15 +51,19 @@ public class ExcelConverter {
         int rowCount = 0;
 
         for (LineItem item : lineItems) {
+            //For each line item create a new row, and two cells in that row
             Row row = sheet.createRow(++rowCount);
             Cell itemCode = row.createCell(1);
             Cell quantity = row.createCell(2);
 
+            //Set the first cell's value to be the item code
             itemCode.setCellValue(item.getProduct().getItemCode());
+            //Set the second cell's value to be the quantity ordered
             quantity.setCellValue(item.getQuantity());
 
         }
 
+        //Return the completed workbook!
         return (AutoCloseable) workbook;
     }
 
