@@ -1,9 +1,16 @@
+
+/********************* nav bar ******************************/
 .fa-1x {
 font-size: 1.5rem;
 }
 .navbar-toggler.toggler-example {
 cursor: pointer;
 }
+
+.navbar-appname{
+font-weight: bold;
+}
+
 .dark-blue-text {
 color: #0A38F5;
 }
@@ -249,106 +256,29 @@ input.btn.btn-primary {
 
 /* Login CSS End ---------------------------------------------------------*/
 
-/* *************************************ORIGINAL ABOUTUS CSS************************************** */
-
-.flex {
-  display: flex;
-  flex-direction: column;
-}
-
-.motto {
-  font-style: oblique;
-}
-
-.dev-content {
-  font-size: 20px;
-  color: black;
-  font-family: 'MAGIC';
-}
-
+/************************************ about us *****************************/
 .github-logo {
   max-width:7%;
   max-height: 2%;
 }
 
-.devs {
-  font-style: bold;
-  font-size: 18px;
+
+/* ********homepage styling******** */
+
+:root {
+  --input-padding-x: 1.5rem;
+  --input-padding-y: 0.75rem;
 }
 
-.bold-name {
-  font-weight: bold;
-  display: inline;
+.login,
+.image {
+  min-height: 100vh;
 }
 
-.profile-img {
-padding:10px;
+.bg-image {
+  background-image: url('https://images.unsplash.com/photo-1563391017873-6e6beab67fed?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80');
+  background-size: cover;
+  background-position: center;
 }
 
-.pic {
-  max-width:25%;
-  max-height: 25%;
-}
-
-.readable{
-
-font-size: 10px;
-
-
-/************************************ burger menu*****************************/
-
-#burgerMenuContainer {
-  display: inline-block;
-  margin: 6px;
-}
-#bar1, #bar2, #bar3 {
-  width: 35px;
-  height: 5px;
-  background-color: #4285F4;
-  /* background-color: #1abc9c; */
-  margin: 6px 0;
-  transition: 0.4s;
-}
-/* burger menu - on-click transition to X */
-.changeMenu #bar1 {
-  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
-  transform: rotate(-45deg) translate(-9px, 6px);
-}
-.changeMenu #bar2 {opacity: 0;}
-.changeMenu #bar3 {
-  -webkit-transform: rotate(45deg) translate(-8px, -8px);
-  transform: rotate(45deg) translate(-8px, -8px);
-}
-/* toggle menu display on-burger-menu-click */
-#menuContainer {
-  display: none; /* starts with display: none;, toggle triggered in burgerToX function */
-}
-
-/* ********hbootstrap hamburger menu********* */
-.navbar-toggler{
-  width: 35px;
-  height: 5px;
-  background-color: #4285F4;
-  /* background-color: #1abc9c; */
-  margin: 6px 0;
-  transition: 0.4s;
-}
-
-.fa-1x {
-font-size: 1.5rem;
-}
-.navbar-toggler.toggler-example {
-cursor: pointer;
-}
-.dark-blue-text {
-color: #0A38F5;
-}
-.dark-pink-text {
-color: #AC003A;
-}
-.dark-amber-text {
-color: #ff6f00;
-}
-.dark-teal-text {
-color: #004d40;
 }
