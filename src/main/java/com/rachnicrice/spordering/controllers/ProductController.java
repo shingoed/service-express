@@ -36,8 +36,7 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public String showPage(Principal p, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "item_id") String sortBy) {
-//        PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+    public String showPage(Principal p, Model model) {
 
         if(p != null) {
             System.out.println(p.getName()+" is logged in!");
@@ -46,10 +45,12 @@ public class ProductController {
             System.out.println("nobody is logged in");
         }
 
+        // pass in isAdmin object
+        model.addAttribute("isAuthorized", applicationUserRepository.findByUsername(p.getName()).getAdmin());
+        System.out.println("IS ADMIN"+applicationUserRepository.findByUsername(p.getName()).getAdmin());
 
         model.addAttribute("data", productRepository.findAll());
 //        System.out.println("FIND PRODUCT ID"+productRepository.);
-        model.addAttribute("currentPage",page);
         return "products";
     }
 
@@ -127,14 +128,21 @@ public class ProductController {
     public RedirectView save(Product product) {
         productRepository.save(product);
 
-        return new RedirectView("/product");
+        return new RedirectView("/products");
     }
 
     @GetMapping("/delete")
     public RedirectView delete(Long id) {
+
+        // iterating through each item in LineItem and comparing the foreign key with the id and deleting items in LineItem prior to deleting product.
+        for(LineItem item : lineItemRepository.findAll()) {
+            if(item.getProduct().getId() == id) {
+                lineItemRepository.deleteById(item.getId());
+            }
+        }
         productRepository.deleteById(id);
 
-        return new RedirectView("/product");
+        return new RedirectView("/products");
     }
 
     @GetMapping("/findOne")
