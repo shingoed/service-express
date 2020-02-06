@@ -2,7 +2,9 @@
 
 ## Team Float: Ellen, Hai, Rachael, Shingo
 
-This web application is a prototype online store for the customers of Service Partners branch 2007. Users will have to ability to select items and quantities, add them to a cart, delete or edit items from that cart and submit their order to the sales team.
+Overview: This web application is a prototype online store for the customers of Service Partners branch 2007. Users will have to ability to select items and quantities, add them to a cart, delete or edit items from that cart and submit their order. Once an order is submitted it will be emailed as an excel attachment to the branch 2007 sales team.
+
+[Visit the Deployed Site Here!](https://service-partners-express.herokuapp.com/)
 
 #### Project Pitch: [Click Here](https://docs.google.com/document/d/1YybsAaAyw-0DSdFZIQa836C8rAtLPWxf9jNxDjD0XdI/edit)
 #### Feature Ideas: [Click Here](https://docs.google.com/document/d/1usTgP-EIFnJVzO-sZFlOkzxSCus_oPFbOm1lqI1JkBE/edit?usp=sharing)
@@ -17,6 +19,22 @@ This web application is a prototype online store for the customers of Service Pa
 4. Start the server with the ```./gradlew bootRun``` command
 5. In your browser visit localhost:8080 to see the running application
 
+Integration testing
+1. Set env variables in intellij in order for the tests to run because it wouldn't recognize the application context if its not there
+
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+### Technologies Used:
+  - [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html)
+  - [Heroku](https://devcenter.heroku.com/categories/reference)
+  - [Apache POI](https://poi.apache.org/)
+  - [Bootstrap](https://getbootstrap.com/)
+  - [Jquery](https://jquery.com/)
+  - [Java](https://www.java.com/en/)
+  - [Gradle](https://gradle.org/)
+  - [Thymeleaf](https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html)
 
 ------------------------------------------------------------------------------------------------------------------------------
 

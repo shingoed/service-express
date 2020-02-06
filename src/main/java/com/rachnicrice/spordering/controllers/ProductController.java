@@ -36,8 +36,7 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public String showPage(Principal p, Model model, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "item_id") String sortBy) {
-//        PageRequest pagereq = PageRequest.of(page,4, Sort.by(sortBy).ascending());
+    public String showPage(Principal p, Model model) {
 
         if(p != null) {
             System.out.println(p.getName()+" is logged in!");
@@ -46,10 +45,11 @@ public class ProductController {
             System.out.println("nobody is logged in");
         }
 
+        // pass in isAdmin object
+        model.addAttribute("isAuthorized", applicationUserRepository.findByUsername(p.getName()).getAdmin());
+        System.out.println("IS ADMIN"+applicationUserRepository.findByUsername(p.getName()).getAdmin());
 
         model.addAttribute("data", productRepository.findAll());
-//        System.out.println("FIND PRODUCT ID"+productRepository.);
-        model.addAttribute("currentPage",page);
         return "products";
     }
 
@@ -66,17 +66,13 @@ public class ProductController {
         }
 
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
-
         List<Order> userOrders = loggedInUser.getOrders();
-
         boolean startedAtLeastOneOrder = userOrders!=null;
-
 
         // Initialize as as true (case that does not have any unsubmitted orders), set to false if one is found in the loop
         boolean onlySubmittedOrders = true;
-        if (userOrders!=null) {
+        if (userOrders.size() > 0) {
             for (Order order : userOrders) {
                 if (order.getSubmitted()==false) {
                     onlySubmittedOrders = false;
@@ -84,19 +80,40 @@ public class ProductController {
             }
         }
 
+        System.out.println("MADE IT to main part of function");
+
         if (!startedAtLeastOneOrder || onlySubmittedOrders) {
             Order order = new Order(loggedInUser, createdAt,false);
             orderRepository.save(order);
             //change hard coded 1 and 10 to path variables
+
             LineItem cartItem = new LineItem(order, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
             lineItemRepository.save(cartItem);
         } else {
             for (Order order : userOrders) {
                 if (order.getSubmitted()==false) {
                     Order unsubmittedOrder = order;
-                    //change hard coded 1 and 10 to path variables
-                    LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
-                    lineItemRepository.save(cartItem);
+                    List<LineItem> lineItems = unsubmittedOrder.getItemsInThisOrder();
+
+                    if (lineItems.isEmpty()) {
+                        LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
+                        lineItemRepository.save(cartItem);
+                    } else {
+                        for (LineItem lineItem : lineItems) {
+                            if (item_id == lineItem.getProduct().getItem_id()) {
+                                Integer prevQty = lineItem.getQuantity();
+                                lineItem.setQuantity(prevQty + quantity);
+                                lineItemRepository.save(lineItem);
+                                System.out.println("made it to UPDATE line item");
+                            } else {
+                                LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
+                                lineItemRepository.save(cartItem);
+                                System.out.println("made it to make new item");
+                            }
+                        }
+                    }
+
+
                 }
             }
 
@@ -107,17 +124,27 @@ public class ProductController {
 
 
     @PostMapping("/save")
-    public RedirectView save(Product product) {
-        productRepository.save(product);
+    public RedirectView save(Product product, Principal p) {
+        if(applicationUserRepository.findByUsername(p.getName()).getAdmin()) {
+            productRepository.save(product);
+        }
 
-        return new RedirectView("/product");
+        return new RedirectView("/products");
     }
 
     @GetMapping("/delete")
-    public RedirectView delete(Long id) {
-        productRepository.deleteById(id);
+    public RedirectView delete(Long id, Principal p) {
 
-        return new RedirectView("/product");
+        // iterating through each item in LineItem and comparing the foreign key with the id and deleting items in LineItem prior to deleting product.
+        if(applicationUserRepository.findByUsername(p.getName()).getAdmin()) {
+            for (LineItem item : lineItemRepository.findAll()) {
+                if (item.getProduct().getId() == id) {
+                    lineItemRepository.deleteById(item.getId());
+                }
+            }
+            productRepository.deleteById(id);
+        }
+        return new RedirectView("/products");
     }
 
     @GetMapping("/findOne")

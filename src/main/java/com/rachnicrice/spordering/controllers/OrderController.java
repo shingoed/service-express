@@ -32,7 +32,7 @@ public class OrderController {
 
 
     @GetMapping("/mycart")
-    public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
+    public String showCart(Model model, Principal p) {
 
         if (p != null) {
             System.out.println(p.getName()+" is logged in!");
@@ -58,17 +58,14 @@ public class OrderController {
                         cartProducts.add(cartProduct);
                     }
                     model.addAttribute("dataList", lineItems);
-                    model.addAttribute("order", unsubmittedOrder);
-
+                    model.addAttribute("order", unsubmittedOrder.getOrder_id());
                 }
             }
         } else {
             Order newOrder = new Order(applicationUserRepository.findByUsername(p.getName()), new Date(), false);
             orderRepository.save(newOrder);
-            model.addAttribute("order", newOrder);
+            model.addAttribute("order", newOrder.getOrder_id());
         }
-        model.addAttribute("currentPage",page);
-
         return "mycart";
     }
 
