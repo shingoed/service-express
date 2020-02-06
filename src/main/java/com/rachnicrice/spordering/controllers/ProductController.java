@@ -99,21 +99,22 @@ public class ProductController {
                         LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
                         lineItemRepository.save(cartItem);
                     } else {
+                        boolean alreadyInCart = false;
                         for (LineItem lineItem : lineItems) {
-                            if (item_id == lineItem.getProduct().getItem_id()) {
-                                Integer prevQty = lineItem.getQuantity();
+                            if (item_id.equals(lineItem.getProduct().getItem_id())) {
+                                alreadyInCart = true;
+                                int prevQty = lineItem.getQuantity();
                                 lineItem.setQuantity(prevQty + quantity);
                                 lineItemRepository.save(lineItem);
                                 System.out.println("made it to UPDATE line item");
-                            } else {
-                                LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
-                                lineItemRepository.save(cartItem);
-                                System.out.println("made it to make new item");
                             }
                         }
+                        if (!alreadyInCart) {
+                            LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
+                            lineItemRepository.save(cartItem);
+                            System.out.println("made it to make new item");
+                        }
                     }
-
-
                 }
             }
 
