@@ -17,6 +17,10 @@ This web application is a prototype online store for the customers of Service Pa
 4. Start the server with the ```./gradlew bootRun``` command
 5. In your browser visit localhost:8080 to see the running application
 
+Integration testing
+1. Set env variables in intellij in order for the tests to run because it wouldn't recognize the application context if its not there
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------
 
