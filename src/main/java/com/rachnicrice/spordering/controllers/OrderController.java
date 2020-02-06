@@ -32,7 +32,7 @@ public class OrderController {
 
 
     @GetMapping("/mycart")
-    public String showCart(Model model, Principal p, @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "id") String sortBy) {
+    public String showCart(Model model, Principal p) {
 
         if (p != null) {
             System.out.println(p.getName()+" is logged in!");
@@ -66,8 +66,6 @@ public class OrderController {
             orderRepository.save(newOrder);
             model.addAttribute("order", newOrder.getOrder_id());
         }
-        model.addAttribute("currentPage",page);
-
         return "mycart";
     }
 

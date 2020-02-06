@@ -22,6 +22,7 @@ public class ApplicationUser implements UserDetails {
     String firstName;
     String lastName;
     String businessName;
+    private Boolean isAdmin;
 
     @OneToMany(mappedBy = "user")
     List<Order> orders;
@@ -71,6 +72,18 @@ public class ApplicationUser implements UserDetails {
         this.businessName = businessName;
     }
 
+    public ApplicationUser(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_number, String businessName, Boolean isAdmin) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.spCustomer_number = spCustomer_number;
+        this.businessName = businessName;
+        this.isAdmin = isAdmin;
+    }
+
     //instance methods
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -117,6 +130,10 @@ public class ApplicationUser implements UserDetails {
 
     public String getBusinessName() { return businessName; }
 
+    //only can get admin for now and it will be hard coded in to prevent html, sql injection.
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
 
     @Override
     public boolean isAccountNonExpired() {
