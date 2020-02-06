@@ -6,7 +6,6 @@ import com.rachnicrice.spordering.utils.ExcelConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -38,6 +37,7 @@ public class EmailController {
         //Create a new message
         MimeMessage message = jSender.createMimeMessage();
 
+        //Get the customer id to send in the body of the email
         String customerID = repo.getOne(id).getUser().getSpCustomer_number();
 
         MimeMessageHelper helper = null;
@@ -50,8 +50,9 @@ public class EmailController {
             //Set the email body
             helper.setText("New online order from " + customerID);
 
-            //Create teh excel from the order data
+            //Create the excel from the order data
             try {
+                //this will create a new excel called order.xlsx
                 Resource responseFile = ExcelConverter.export("order.xlsx", id, repo);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -60,13 +61,14 @@ public class EmailController {
             //Create a FileSystemResource that = the file you want to send from your database
             FileSystemResource file = new FileSystemResource(new File("order.xlsx"));
             // Attach that file to your email
-            helper.addAttachment("Invoice.xlsx", file);
+            helper.addAttachment("online-order.xlsx", file);
         } catch (MessagingException e) {
             e.printStackTrace();
         }
 
         //Send your email
         jSender.send(message);
+        //Send the user back to the cart page with the submitted param (this param will cause a confirmation message to be shown via thymeleaf)
         return new RedirectView("/mycart?submitted=true");
     }
 

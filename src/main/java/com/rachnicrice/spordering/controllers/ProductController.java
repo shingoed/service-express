@@ -76,7 +76,7 @@ public class ProductController {
 
         // Initialize as as true (case that does not have any unsubmitted orders), set to false if one is found in the loop
         boolean onlySubmittedOrders = true;
-        if (userOrders!=null) {
+        if (userOrders.size() > 0) {
             for (Order order : userOrders) {
                 if (order.getSubmitted()==false) {
                     onlySubmittedOrders = false;

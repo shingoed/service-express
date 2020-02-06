@@ -47,14 +47,15 @@
                     </tr>
                 </tbody>
 
-            </table>
+                
+                <div th:unless="${param.submitted}">
+                    <form action="/submit" method="POST">
+                        <input type="hidden" name="id" th:value="${order}">
+                        <input type="submit">
+                    </form>
+                </div>
 
-            <div th:unless="${param.submitted}" style="float:right">
-                <form action="/submit" method="POST">
-                    <input type="hidden" name="id" th:value="${order.order_id}">
-                    <input type="submit">
-                </form>
-            </div>
+            </table>
 
             <!--                horizontal line-->
             <ul class="nav nav-pills">

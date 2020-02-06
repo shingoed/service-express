@@ -58,13 +58,13 @@ public class OrderController {
                         cartProducts.add(cartProduct);
                     }
                     model.addAttribute("dataList", lineItems);
-                    model.addAttribute("order", unsubmittedOrder);
+                    model.addAttribute("order", unsubmittedOrder.getOrder_id());
                 }
             }
         } else {
             Order newOrder = new Order(applicationUserRepository.findByUsername(p.getName()), new Date(), false);
             orderRepository.save(newOrder);
-            model.addAttribute("order", newOrder);
+            model.addAttribute("order", newOrder.getOrder_id());
         }
         model.addAttribute("currentPage",page);
 
