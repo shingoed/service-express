@@ -50,7 +50,6 @@ public class ProductController {
         System.out.println("IS ADMIN"+applicationUserRepository.findByUsername(p.getName()).getAdmin());
 
         model.addAttribute("data", productRepository.findAll());
-//        System.out.println("FIND PRODUCT ID"+productRepository.);
         return "products";
     }
 
@@ -125,23 +124,26 @@ public class ProductController {
 
 
     @PostMapping("/save")
-    public RedirectView save(Product product) {
-        productRepository.save(product);
+    public RedirectView save(Product product, Principal p) {
+        if(applicationUserRepository.findByUsername(p.getName()).getAdmin()) {
+            productRepository.save(product);
+        }
 
         return new RedirectView("/products");
     }
 
     @GetMapping("/delete")
-    public RedirectView delete(Long id) {
+    public RedirectView delete(Long id, Principal p) {
 
         // iterating through each item in LineItem and comparing the foreign key with the id and deleting items in LineItem prior to deleting product.
-        for(LineItem item : lineItemRepository.findAll()) {
-            if(item.getProduct().getId() == id) {
-                lineItemRepository.deleteById(item.getId());
+        if(applicationUserRepository.findByUsername(p.getName()).getAdmin()) {
+            for (LineItem item : lineItemRepository.findAll()) {
+                if (item.getProduct().getId() == id) {
+                    lineItemRepository.deleteById(item.getId());
+                }
             }
+            productRepository.deleteById(id);
         }
-        productRepository.deleteById(id);
-
         return new RedirectView("/products");
     }
 

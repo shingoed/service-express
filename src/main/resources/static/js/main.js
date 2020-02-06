@@ -5,13 +5,8 @@ $(document).ready(function() {
     $('.nBtn, .table .eBtn').on('click', function(event) {
         event.preventDefault();
         var href = $(this).attr('href');
-        console.log("THIS IS HREF"+href);
-
-        // find all the # after the last /
         var text = $(this).text();
-        console.log("TEXT VALUES" + text)
         if(text=='Edit'){ // Getting info and fill them in the correct data to make changes
-
             $.get(href,function(product,status){
                 $('.myForm #id').val(product.id)
                 $('.myForm #itemCode').val(product.itemCode)
