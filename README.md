@@ -27,15 +27,15 @@ Integration testing
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### Technologies Used:
- - Spring MVC (Spring boot)
- - Heroku
- - Apache POI
- - Bootstrap
- - Jquery
- - Java
- - CSS3
- - Gradle
- - Thymeleaf
+  - [Spring MVC](https://docs.spring.io/spring/docs/current/spring-framework-reference/web.html)
+  - [Heroku](https://devcenter.heroku.com/categories/reference)
+  - [Apache POI](https://poi.apache.org/)
+  - [Bootstrap](https://getbootstrap.com/)
+  - [Jquery](https://jquery.com/)
+  - [Java](https://www.java.com/en/)
+  - CSS3
+  - [Gradle](https://gradle.org/)
+  - [Thymeleaf](https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html)
 
 ------------------------------------------------------------------------------------------------------------------------------
 
