@@ -20,12 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class SpOrderingApplicationTests {
 
-
-
-
 //	dont know why its asking me to go to route 302 instead of isOk(), why is the page empty("") with no content??
-
-
 
 	@Autowired
 	private	MockMvc mockMvc;
@@ -47,6 +42,8 @@ class SpOrderingApplicationTests {
 	}
 
 
+	//All the other get routes should return 302's since their login restricted
+
 	@Test
 	public void testAboutUsPage() throws Exception {
 		this.mockMvc.perform(get("/about-us"))
@@ -55,12 +52,13 @@ class SpOrderingApplicationTests {
 				.andExpect(content().string(containsString("")));
 	}
 
+
 	@Test
 	public void testContactUsPage() throws Exception {
 		this.mockMvc.perform(get("/contactus"))
 				.andDo(print())
 				.andExpect(status().is(302))
-				.andExpect(content().string(containsString("Service Express")));
+				.andExpect(content().string(containsString("")));
 	}
 
 	@Test
@@ -68,7 +66,7 @@ class SpOrderingApplicationTests {
 		this.mockMvc.perform(get("/profile"))
 				.andDo(print())
 				.andExpect(status().is(302))
-				.andExpect(content().string(containsString("<a href=\"/\" class=\"navbar-appname\">Service Express</a>")));
+				.andExpect(content().string(containsString("")));
 	}
 
 	@Test
@@ -76,7 +74,7 @@ class SpOrderingApplicationTests {
 		this.mockMvc.perform(get("/mycart"))
 				.andDo(print())
 				.andExpect(status().is(302))
-				.andExpect(content().string(containsString("<a href=\"/\" class=\"navbar-appname\">Service Express</a>")));
+				.andExpect(content().string(containsString("")));
 	}
 
 	@Test
@@ -84,15 +82,15 @@ class SpOrderingApplicationTests {
 		this.mockMvc.perform(get("/mycart/findOne"))
 				.andDo(print())
 				.andExpect(status().is(302))
-				.andExpect(content().string(containsString("<a href=\"/\" class=\"navbar-appname\">Service Express</a>")));
+				.andExpect(content().string(containsString("")));
 	}
 
 	@Test
 	public void testProductsPage() throws Exception {
 		this.mockMvc.perform(get("/products"))
 				.andDo(print())
-				.andExpect(status().is(200))
-				.andExpect(content().string(containsString("<a href=\"/\" class=\"navbar-appname\">Service Express</a>")));
+				.andExpect(status().is(302))
+				.andExpect(content().string(containsString("")));
 	}
 
 	@Test
@@ -100,7 +98,7 @@ class SpOrderingApplicationTests {
 		this.mockMvc.perform(get("/findOne"))
 				.andDo(print())
 				.andExpect(status().is(302))
-				.andExpect(content().string(containsString("<a href=\"/\" class=\"navbar-appname\">Service Express</a>")));
+				.andExpect(content().string(containsString("")));
 	}
 
 	@Test
@@ -108,7 +106,7 @@ class SpOrderingApplicationTests {
 		this.mockMvc.perform(get("/populateDatabase"))
 				.andDo(print())
 				.andExpect(status().is(302))
-				.andExpect(content().string(containsString("<a href=\"/\" class=\"navbar-appname\">Service Express</a>")));
+				.andExpect(content().string(containsString("")));
 	}
 
 }
