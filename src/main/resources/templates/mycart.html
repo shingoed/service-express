@@ -46,17 +46,17 @@
                         </td>
                     </tr>
                 </tbody>
-                
-                <div th:unless="${param.submitted}">
-                    <form action="/submit" method="POST">
-                        <input type="hidden" name="id" th:value="${order.order_id}">
-                        <input type="submit">
-                    </form>
-                </div>
 
             </table>
+
+            <div th:unless="${param.submitted}" style="float:right">
+                <form action="/submit" method="POST">
+                    <input type="hidden" name="id" th:value="${order.order_id}">
+                    <input type="submit">
+                </form>
+            </div>
+
             <!--                horizontal line-->
-            <hr/>
             <ul class="nav nav-pills">
 <!--                <li class="nav-item" th:each="i : ${#numbers.sequence(0,data.totalPages-1)}">-->
 <!--                    <a th:href="@{/product/(page=${i})}" th:text="${i}" class="nav-link" th:classappend="${currentPage} ==${i}?'active':''"></a>-->
