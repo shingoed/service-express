@@ -33,7 +33,6 @@ Integration testing
   - [Bootstrap](https://getbootstrap.com/)
   - [Jquery](https://jquery.com/)
   - [Java](https://www.java.com/en/)
-  - CSS3
   - [Gradle](https://gradle.org/)
   - [Thymeleaf](https://www.thymeleaf.org/doc/tutorials/2.1/usingthymeleaf.html)
 
