@@ -88,6 +88,7 @@ public class ProductController {
             Order order = new Order(loggedInUser, createdAt,false);
             orderRepository.save(order);
             //change hard coded 1 and 10 to path variables
+
             LineItem cartItem = new LineItem(order, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
             lineItemRepository.save(cartItem);
         } else {
@@ -95,6 +96,12 @@ public class ProductController {
                 if (order.getSubmitted()==false) {
                     Order unsubmittedOrder = order;
                     //change hard coded 1 and 10 to path variables
+                    // before creating a new line item check to see if there's already existing item in cart then update it. check order_id
+                    System.out.println("Made it into creating an lineITEM ROUTE.");
+                    if(item_id == lineItemRepository.getOne((long) 31).getProduct().getItem_id()){
+                        System.out.println("LOGGING IF ITS CHECKING THE SAME ITEM # 2"); // got in it.
+
+                    }
                     LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
                     lineItemRepository.save(cartItem);
                 }

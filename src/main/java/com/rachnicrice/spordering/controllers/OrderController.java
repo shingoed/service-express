@@ -83,6 +83,7 @@ public class OrderController {
         if (loggedInUser == userAssociatedWithLineItem) {
 //            lineItemRepository.getOne(id);
             System.out.println("made to spot where the delete will happen");
+            lineItemRepository.deleteById(id);
 
         }
 
@@ -102,8 +103,7 @@ public class OrderController {
 
         if (loggedInUser == userAssociatedWithLineItem) {
             lineItem.setQuantity(quantity);
-            System.out.println("made to spot where the EDIT will happen");
-
+            lineItemRepository.save(lineItem);
 
         }
 
