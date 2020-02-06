@@ -66,13 +66,9 @@ public class ProductController {
         }
 
         Timestamp createdAt = new Timestamp(System.currentTimeMillis());
-
         ApplicationUser loggedInUser = applicationUserRepository.findByUsername(p.getName());
-
         List<Order> userOrders = loggedInUser.getOrders();
-
         boolean startedAtLeastOneOrder = userOrders!=null;
-
 
         // Initialize as as true (case that does not have any unsubmitted orders), set to false if one is found in the loop
         boolean onlySubmittedOrders = true;
@@ -83,6 +79,8 @@ public class ProductController {
                 }
             }
         }
+
+        System.out.println("MADE IT to main part of function");
 
         if (!startedAtLeastOneOrder || onlySubmittedOrders) {
             Order order = new Order(loggedInUser, createdAt,false);
@@ -95,15 +93,27 @@ public class ProductController {
             for (Order order : userOrders) {
                 if (order.getSubmitted()==false) {
                     Order unsubmittedOrder = order;
-                    //change hard coded 1 and 10 to path variables
-                    // before creating a new line item check to see if there's already existing item in cart then update it. check order_id
-                    System.out.println("Made it into creating an lineITEM ROUTE.");
-                    if(item_id == lineItemRepository.getOne((long) 31).getProduct().getItem_id()){
-                        System.out.println("LOGGING IF ITS CHECKING THE SAME ITEM # 2"); // got in it.
+                    List<LineItem> lineItems = unsubmittedOrder.getItemsInThisOrder();
 
+                    if (lineItems.isEmpty()) {
+                        LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
+                        lineItemRepository.save(cartItem);
+                    } else {
+                        for (LineItem lineItem : lineItems) {
+                            if (item_id == lineItem.getProduct().getItem_id()) {
+                                Integer prevQty = lineItem.getQuantity();
+                                lineItem.setQuantity(prevQty + quantity);
+                                lineItemRepository.save(lineItem);
+                                System.out.println("made it to UPDATE line item");
+                            } else {
+                                LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
+                                lineItemRepository.save(cartItem);
+                                System.out.println("made it to make new item");
+                            }
+                        }
                     }
-                    LineItem cartItem = new LineItem(unsubmittedOrder, productRepository.getOne(item_id), quantity);// create new cart item with order, product, and quantity
-                    lineItemRepository.save(cartItem);
+
+
                 }
             }
 
