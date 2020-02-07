@@ -38,6 +38,11 @@ Integration testing
 
 ------------------------------------------------------------------------------------------------------------------------------
 
+### The Running Application
+
+![Splash Page]()
+------------------------------------------------------------------------------------------------------------------------------
+
 ### User Stories
  
  - As a customer, I want to be able to create an account on the ordering site, so I can place orders.
