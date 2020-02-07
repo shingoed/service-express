@@ -40,7 +40,7 @@ Integration testing
 
 ### The Running Application
 
-![Splash Page]()
+![Splash Page](assets/splash.png)
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### User Stories
