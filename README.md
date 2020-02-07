@@ -41,6 +41,16 @@ Integration testing
 ### The Running Application
 
 ![Splash Page](assets/splash.png)
+
+![Products Page](assets/products.png)
+
+![Cart Page](assets/cart.png)
+
+![Submitted Message](assets/submitted.png)
+
+![About Us 1](assets/about-us1.png)
+
+![About Us 2](assets/about-us2.png)
 ------------------------------------------------------------------------------------------------------------------------------
 
 ### User Stories
