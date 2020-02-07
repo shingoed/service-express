@@ -191,7 +191,7 @@ public class ProductController {
 
         // make a set of new admins to add
         HashSet<ApplicationUser> adminsToAdd = new HashSet<>();
-        adminsToAdd.add(new ApplicationUser("spadmin", encoder.encode("servicepartnersadmin"), true));
+//        adminsToAdd.add(new ApplicationUser([ENTER ACCOUNT VALUES]));
 
         // for each product in the set, add it to the database only if there isn't already a product with that item code in the database
         for (Product product : productsToAdd) {
