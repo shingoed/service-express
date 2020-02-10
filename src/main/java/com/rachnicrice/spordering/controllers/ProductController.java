@@ -56,6 +56,7 @@ public class ProductController {
         return "products";
     }
 
+    
     @PostMapping("/mycart")
     public RedirectView addCart(Model model, Principal p, Long item_id, int quantity) {
         System.out.println(item_id);
