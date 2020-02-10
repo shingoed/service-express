@@ -1,7 +1,8 @@
 package com.rachnicrice.spordering.models;
 
+//Deleted dead code w/ Ashlyn in Review
+
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Product {
@@ -10,53 +11,49 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long item_id;
 
+    //Deleted instance variable 'type' since it was redundant w/ itemName
     private String itemCode;
     private String itemName;
     private String width;
     private String length;
     private String color;
     private String style;
-    private String type;
     private int orderIncrement;
 
     public Product() { }
 
-    public Product(String itemCode, String itemName, String width, String length, String color, String style, String type) {
+    public Product(String itemCode, String itemName, String width, String length, String color, String style) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.width = width;
         this.length = length;
         this.color = color;
         this.style = style;
-        this.type = type;
     }
 
-    public Product(String itemCode, String itemName, String width, String length, String color, String style, String type, int orderIncrement) {
+    public Product(String itemCode, String itemName, String width, String length, String color, String style, int orderIncrement) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.width = width;
         this.length = length;
         this.color = color;
         this.style = style;
-        this.type = type;
         this.orderIncrement = orderIncrement;
     }
 
-    public Product(String itemCode, String itemName, String length, String color, String type) {
+    public Product(String itemCode, String itemName, String length, String color) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.length = length;
         this.color = color;
-        this.type = type;
     }
 
-    public Product(String itemCode, String itemName, String length, String width, String style, String type) {
+    public Product(String itemCode, String itemName, String length, String width, String style) {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.width = width;
         this.length = length;
         this.style = style;
-        this.type = type;
     }
 
     public Long getItem_id() {
@@ -115,14 +112,6 @@ public class Product {
         this.style = style;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getItemName() {
         return itemName;
     }
@@ -144,7 +133,6 @@ public class Product {
                 ", length=" + length +
                 ", color='" + color + '\'' +
                 ", style='" + style + '\'' +
-                ", type='" + type + '\'' +
                 '}';
     }
 }

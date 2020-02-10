@@ -1,10 +1,8 @@
 package com.rachnicrice.spordering.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+//Deleted dead code w/ Ashlyn in Review
 
 import javax.persistence.*;
-import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

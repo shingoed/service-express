@@ -15,6 +15,7 @@ public class ApplicationUser implements UserDetails {
     Long user_id;
 
     String username;
+    //Service Partners issues spCustomer_number
     String spCustomer_number;
     String password;
     String email;

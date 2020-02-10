@@ -54,16 +54,12 @@ public class HomeController {
 
     @PostMapping("/signup")
     public RedirectView signup(String username, String password, String email, String phone, String firstName, String lastName, String spCustomer_number, String businessName) {
+        //Check to see if the person is already in DB
         if (applicationUserRepository.findByUsername(username) == null) {
-            System.out.println("username: " + username);
-            System.out.println("password: " + password);
-            System.out.println("email: " + email);
-            System.out.println("lastName: " + lastName);
-            System.out.println("firstName: " + firstName);
-            System.out.println("spCustomer_number: " + spCustomer_number);
+            //Make a new ApplicationUser if they don't already exist
             ApplicationUser newUser = new ApplicationUser(username, encoder.encode(password),email,phone,firstName,lastName, spCustomer_number, businessName);
             applicationUserRepository.save(newUser);
-            System.out.println(newUser.toString());
+
 //            auto-login when people sign up
             Authentication authentication = new UsernamePasswordAuthenticationToken(newUser, null, new ArrayList<>());
             SecurityContextHolder.getContext().setAuthentication(authentication);
